@@ -7,29 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* ImportantThingsMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ImportantThingsMobileTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		3D5E92B991F9A98E852E1417 /* libPods-ImportantThingsMobile-ImportantThingsMobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8963C0BEA741A5E2696B0A18 /* libPods-ImportantThingsMobile-ImportantThingsMobileTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		B11BAA10277E4F4B004390DF /* OxygenSansBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B11BAA0C277E4F4A004390DF /* OxygenSansBold.otf */; };
+		B11BAA11277E4F4B004390DF /* OxygenSansBoldOblique.otf in Resources */ = {isa = PBXBuildFile; fileRef = B11BAA0D277E4F4B004390DF /* OxygenSansBoldOblique.otf */; };
+		B11BAA12277E4F4B004390DF /* OxygenSansBook.otf in Resources */ = {isa = PBXBuildFile; fileRef = B11BAA0E277E4F4B004390DF /* OxygenSansBook.otf */; };
+		B11BAA13277E4F4B004390DF /* OxygenSansBookOblique.otf in Resources */ = {isa = PBXBuildFile; fileRef = B11BAA0F277E4F4B004390DF /* OxygenSansBookOblique.otf */; };
 		F1AE5D7839F8BBAC8788B91E /* libPods-ImportantThingsMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1007AC241612FC45D92957 /* libPods-ImportantThingsMobile.a */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		00E356F41AD99517003FC87E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = ImportantThingsMobile;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		00E356EE1AD99517003FC87E /* ImportantThingsMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImportantThingsMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* ImportantThingsMobileTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImportantThingsMobileTests.m; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* ImportantThingsMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImportantThingsMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ImportantThingsMobile/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ImportantThingsMobile/AppDelegate.m; sourceTree = "<group>"; };
@@ -42,19 +31,15 @@
 		9659771005F09D3D8F67703B /* Pods-ImportantThingsMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImportantThingsMobile.debug.xcconfig"; path = "Target Support Files/Pods-ImportantThingsMobile/Pods-ImportantThingsMobile.debug.xcconfig"; sourceTree = "<group>"; };
 		9BA681198B8C1069D5D7ACAC /* Pods-ImportantThingsMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImportantThingsMobile.release.xcconfig"; path = "Target Support Files/Pods-ImportantThingsMobile/Pods-ImportantThingsMobile.release.xcconfig"; sourceTree = "<group>"; };
 		ABE7DDEF9490E3159652D8D2 /* Pods-ImportantThingsMobile-ImportantThingsMobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImportantThingsMobile-ImportantThingsMobileTests.release.xcconfig"; path = "Target Support Files/Pods-ImportantThingsMobile-ImportantThingsMobileTests/Pods-ImportantThingsMobile-ImportantThingsMobileTests.release.xcconfig"; sourceTree = "<group>"; };
+		B11BAA0C277E4F4A004390DF /* OxygenSansBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = OxygenSansBold.otf; path = ImportantThingsMobile/OxygenSansBold.otf; sourceTree = "<group>"; };
+		B11BAA0D277E4F4B004390DF /* OxygenSansBoldOblique.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = OxygenSansBoldOblique.otf; path = ImportantThingsMobile/OxygenSansBoldOblique.otf; sourceTree = "<group>"; };
+		B11BAA0E277E4F4B004390DF /* OxygenSansBook.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = OxygenSansBook.otf; path = ImportantThingsMobile/OxygenSansBook.otf; sourceTree = "<group>"; };
+		B11BAA0F277E4F4B004390DF /* OxygenSansBookOblique.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = OxygenSansBookOblique.otf; path = ImportantThingsMobile/OxygenSansBookOblique.otf; sourceTree = "<group>"; };
 		DB1007AC241612FC45D92957 /* libPods-ImportantThingsMobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImportantThingsMobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		00E356EB1AD99517003FC87E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3D5E92B991F9A98E852E1417 /* libPods-ImportantThingsMobile-ImportantThingsMobileTests.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		13B07F8C1A680F5B00A75B9A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -66,26 +51,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* ImportantThingsMobileTests */ = {
-			isa = PBXGroup;
-			children = (
-				00E356F21AD99517003FC87E /* ImportantThingsMobileTests.m */,
-				00E356F01AD99517003FC87E /* Supporting Files */,
-			);
-			path = ImportantThingsMobileTests;
-			sourceTree = "<group>";
-		};
-		00E356F01AD99517003FC87E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				00E356F11AD99517003FC87E /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		13B07FAE1A68108700A75B9A /* ImportantThingsMobile */ = {
 			isa = PBXGroup;
 			children = (
+				B11BAA0C277E4F4A004390DF /* OxygenSansBold.otf */,
+				B11BAA0D277E4F4B004390DF /* OxygenSansBoldOblique.otf */,
+				B11BAA0E277E4F4B004390DF /* OxygenSansBook.otf */,
+				B11BAA0F277E4F4B004390DF /* OxygenSansBookOblique.otf */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -104,7 +76,6 @@
 				781CEB0561E832AA565F3F49 /* Pods-ImportantThingsMobile-ImportantThingsMobileTests.debug.xcconfig */,
 				ABE7DDEF9490E3159652D8D2 /* Pods-ImportantThingsMobile-ImportantThingsMobileTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -130,7 +101,6 @@
 			children = (
 				13B07FAE1A68108700A75B9A /* ImportantThingsMobile */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* ImportantThingsMobileTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				263D4BB64D59A802D5A3A10B /* Pods */,
@@ -144,7 +114,6 @@
 			isa = PBXGroup;
 			children = (
 				13B07F961A680F5B00A75B9A /* ImportantThingsMobile.app */,
-				00E356EE1AD99517003FC87E /* ImportantThingsMobileTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -152,27 +121,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* ImportantThingsMobileTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "ImportantThingsMobileTests" */;
-			buildPhases = (
-				1CE90D1102871751E2059CEF /* [CP] Check Pods Manifest.lock */,
-				00E356EA1AD99517003FC87E /* Sources */,
-				00E356EB1AD99517003FC87E /* Frameworks */,
-				00E356EC1AD99517003FC87E /* Resources */,
-				286835184C5AB3A4D5E01B88 /* [CP] Embed Pods Frameworks */,
-				F431090318F1AF41F1A3E6D1 /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				00E356F51AD99517003FC87E /* PBXTargetDependency */,
-			);
-			name = ImportantThingsMobileTests;
-			productName = ImportantThingsMobileTests;
-			productReference = 00E356EE1AD99517003FC87E /* ImportantThingsMobileTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		13B07F861A680F5B00A75B9A /* ImportantThingsMobile */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "ImportantThingsMobile" */;
@@ -203,10 +151,6 @@
 			attributes = {
 				LastUpgradeCheck = 1210;
 				TargetAttributes = {
-					00E356ED1AD99517003FC87E = {
-						CreatedOnToolsVersion = 6.2;
-						TestTargetID = 13B07F861A680F5B00A75B9A;
-					};
 					13B07F861A680F5B00A75B9A = {
 						LastSwiftMigration = 1120;
 					};
@@ -226,24 +170,20 @@
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* ImportantThingsMobile */,
-				00E356ED1AD99517003FC87E /* ImportantThingsMobileTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		00E356EC1AD99517003FC87E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		13B07F8E1A680F5B00A75B9A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B11BAA12277E4F4B004390DF /* OxygenSansBook.otf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				B11BAA11277E4F4B004390DF /* OxygenSansBoldOblique.otf in Resources */,
+				B11BAA13277E4F4B004390DF /* OxygenSansBookOblique.otf in Resources */,
+				B11BAA10277E4F4B004390DF /* OxygenSansBold.otf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,28 +205,6 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		1CE90D1102871751E2059CEF /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ImportantThingsMobile-ImportantThingsMobileTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		2586EC551E1C22CAE5484C62 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -307,23 +225,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		286835184C5AB3A4D5E01B88 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ImportantThingsMobile-ImportantThingsMobileTests/Pods-ImportantThingsMobile-ImportantThingsMobileTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ImportantThingsMobile-ImportantThingsMobileTests/Pods-ImportantThingsMobile-ImportantThingsMobileTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ImportantThingsMobile-ImportantThingsMobileTests/Pods-ImportantThingsMobile-ImportantThingsMobileTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		65E309F94C999444CDEF69C2 /* [CP] Copy Pods Resources */ = {
@@ -360,23 +261,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ImportantThingsMobile/Pods-ImportantThingsMobile-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F431090318F1AF41F1A3E6D1 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ImportantThingsMobile-ImportantThingsMobileTests/Pods-ImportantThingsMobile-ImportantThingsMobileTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ImportantThingsMobile-ImportantThingsMobileTests/Pods-ImportantThingsMobile-ImportantThingsMobileTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ImportantThingsMobile-ImportantThingsMobileTests/Pods-ImportantThingsMobile-ImportantThingsMobileTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -399,14 +283,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		00E356EA1AD99517003FC87E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				00E356F31AD99517003FC87E /* ImportantThingsMobileTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		13B07F871A680F5B00A75B9A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -418,66 +294,7 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* ImportantThingsMobile */;
-			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		00E356F61AD99517003FC87E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 781CEB0561E832AA565F3F49 /* Pods-ImportantThingsMobile-ImportantThingsMobileTests.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = ImportantThingsMobileTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lc++",
-					"$(inherited)",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ImportantThingsMobile.app/ImportantThingsMobile";
-			};
-			name = Debug;
-		};
-		00E356F71AD99517003FC87E /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = ABE7DDEF9490E3159652D8D2 /* Pods-ImportantThingsMobile-ImportantThingsMobileTests.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = ImportantThingsMobileTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lc++",
-					"$(inherited)",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ImportantThingsMobile.app/ImportantThingsMobile";
-			};
-			name = Release;
-		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9659771005F09D3D8F67703B /* Pods-ImportantThingsMobile.debug.xcconfig */;
@@ -656,15 +473,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "ImportantThingsMobileTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				00E356F61AD99517003FC87E /* Debug */,
-				00E356F71AD99517003FC87E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "ImportantThingsMobile" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
