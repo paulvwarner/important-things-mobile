@@ -6,6 +6,7 @@ import {Constants} from './Common/Constants';
 import {MessageDisplayingComponent} from './Common/MessageDisplayer';
 import {withContext} from './Common/GlobalContextConsumerComponent';
 import {LoginScreen} from './Login/LoginScreen';
+import {HomeScreen} from './Home/HomeScreen';
 
 let _ = require('underscore');
 
@@ -62,6 +63,13 @@ export let AppRoutes = withContext(class extends React.Component {
                         {
                             [Constants.routes.login.name]: {
                                 screen: LoginScreen,
+                                params: commonRouteParams,
+                                navigationOptions: {
+                                    gesturesEnabled: false,
+                                },
+                            },
+                            [Constants.routes.home.name]: {
+                                screen: HomeScreen,
                                 params: commonRouteParams,
                                 navigationOptions: {
                                     gesturesEnabled: false,

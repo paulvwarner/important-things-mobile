@@ -7,8 +7,11 @@ export const Constants = {
     routes: {
         login: {
             name: 'login',
-            eventDisplayName: 'Login Screen',
             screenClassName: 'LoginScreen'
+        },
+        home: {
+            name: 'home',
+            screenClassName: 'HomeScreen'
         },
     },
 
@@ -18,5 +21,16 @@ export const Constants = {
     environment: {
         local: 'local',
         production: 'production'
+    },
+
+    errorMessages: {
+        incorrectCredentialsLogin: 'Incorrect credentials.',
+        userDeactivatedLogin: 'User is deactivated.',
+        userCannotUseApp: "This user doesn't have the permissions required to this app."
+    },
+
+    storagePrefix: '@ITLSData:',
+    storage: {
+        loginData: 'loginData',
     },
 };

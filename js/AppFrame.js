@@ -20,6 +20,7 @@ import 'react-native-gesture-handler';
 import {MessageDisplayerUtility} from './Common/MessageDisplayerUtility';
 import {AccessibilityUtility} from './Common/AccessibilityUtility';
 import {NavigationUtility} from './Common/NavigationUtility';
+import {ApiUtility} from './Api/ApiUtility';
 
 let _ = require('underscore');
 export let GlobalContext = React.createContext({});
@@ -103,12 +104,15 @@ export let AppFrame = class extends Component {
                 let dimensions = constructDimensions(textMultiplier);
                 let messageDisplayerUtility = new MessageDisplayerUtility();
                 let navigationUtility = new NavigationUtility();
+                var apiUtility = new ApiUtility();
+                apiUtility.setGlobalSettings(globalSettings);
 
                 self.setState({
                     style: constructStyle(textMultiplier, dimensions),
                     dimensions: dimensions,
                     textSizeMultiplier: textMultiplier,
                     globalSettings: globalSettings,
+                    apiUtility: apiUtility,
                     messageDisplayerUtility: messageDisplayerUtility,
                     navigationUtility: navigationUtility,
                     loadingStatusValueManager: loadingStatusValueManager,
@@ -192,6 +196,7 @@ export let AppFrame = class extends Component {
                                 dimensions: this.state.dimensions,
                                 textSizeMultiplier: this.state.textSizeMultiplier,
                                 globalSettings: this.state.globalSettings,
+                                apiUtility: this.state.apiUtility,
                                 messageDisplayerUtility: this.state.messageDisplayerUtility,
                                 navigationUtility: this.state.navigationUtility,
                                 loadingStatusValueManager: this.state.loadingStatusValueManager,

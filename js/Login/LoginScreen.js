@@ -13,6 +13,8 @@ import {
 } from 'react-native';
 import {styleFunctions} from '../Styles/style';
 import {withContext} from '../Common/GlobalContextConsumerComponent';
+import {Constants} from '../Common/Constants';
+import {Storage} from '../Common/Storage';
 
 export let LoginScreen = withContext(class extends React.Component {
     constructor(props) {
@@ -22,6 +24,22 @@ export let LoginScreen = withContext(class extends React.Component {
         this.loadingStatusSetter = props.context.loadingStatusValueManager.createValueSetter();
 
         self.loadingStatusSetter(true);
+
+        window.setTimeout(function () {
+            self.checkIfLoggedIn()
+                .then(function (loginData) {
+                    if (loginData) {
+                        self.loadingStatusSetter(true);
+                        self.handleLoginSuccess(loginData);
+                    } else {
+                        self.showPageContent();
+                    }
+                })
+                .catch(function (error) {
+                    console.log('ERROR during login check: ', error);
+                    self.showPageContent();
+                });
+        }, 0);
 
         this.state = {
             username: this.props.context.globalSettings.fillUsername,
@@ -33,11 +51,19 @@ export let LoginScreen = withContext(class extends React.Component {
 
     componentDidMount = () => {
         this.mounted = true;
-        this.showPageContent();
     };
 
     componentWillUnmount = () => {
         this.mounted = false;
+    };
+
+    componentDidUpdate = (prevProps, prevState, snapshot) => {
+        var self = this;
+        var params = this.props.navigation.state.params;
+        if (params.lastLogoutTime !== prevProps.navigation.state.params.lastLogoutTime) {
+            this.startedLogin = false;
+            this.showPageContent();
+        }
     };
 
     showPageContent = () => {
@@ -83,9 +109,103 @@ export let LoginScreen = withContext(class extends React.Component {
         }
     };
 
+    checkIfLoggedIn = () => {
+        return new Promise(function (resolve, reject) {
+            Storage.get(Constants.storage.loginData)
+                .then(function (loginData) {
+                    if (loginData) {
+                        resolve(loginData);
+                    } else {
+                        resolve(false);
+                    }
+                })
+                .catch(function (error) {
+                    console.log('Error fetching loginData: ', error);
+                    resolve(false);
+                });
+        });
+    };
+
     login = () => {
-        // pvw todo
-        this.props.context.messageDisplayerUtility.displaySuccessMessage("Test message displayer");
+        var self = this;
+        var apiUtility = this.props.context.apiUtility;
+        apiUtility.setNavigationUtility(this.props.context.navigationUtility);
+        Keyboard.dismiss();
+
+        if (this.state.username && ('' + this.state.username).trim().length > 0 &&
+            this.state.password && ('' + this.state.password).trim().length > 0) {
+
+            this.loadingStatusSetter(true);
+            try {
+                apiUtility.login(this.state.username, this.state.password)
+                    .then(function (loginData) {
+                        if (loginData.user.authentication_token) {
+                            self.handleLoginSuccess(loginData);
+                        } else {
+                            if (loginData.message) {
+                                throw new Error(loginData.message);
+                            } else {
+                                throw new Error(Constants.errorMessages.incorrectCredentialsLogin);
+                            }
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log('An error occurred during login.', error.message, error);
+
+                        if (error && error.message && (
+                            error.message === Constants.errorMessages.incorrectCredentialsLogin ||
+                            error.message === Constants.errorMessages.userDeactivatedLogin ||
+                            error.message === Constants.errorMessages.userCannotUseApp
+                        )) {
+                            self.handleLoginError(error.message);
+                        } else {
+                            self.handleLoginError('An error occurred during login.');
+                        }
+                    });
+            } catch (error) {
+                this.handleLoginError(error);
+            }
+        } else {
+            self.props.context.messageDisplayerUtility.displayErrorMessage('Please enter both a username and a password.');
+        }
+    };
+
+    handleLoginSuccess = (loginData) => {
+        var self = this;
+        var apiUtility = this.props.context.apiUtility;
+
+        apiUtility.setToken(loginData.user.authentication_token);
+        apiUtility.setLoginData(loginData);
+
+        // fade out, then go to next screen
+        Animated.timing(
+            this.state.viewOpacity,
+            {
+                toValue: 0.0,
+                duration: 500,
+                easing: Easing.linear,
+                delay: 0,
+            },
+        ).start();
+
+        self.state.viewOpacity.addListener(() => {
+            if (self.state.viewOpacity._value === 0 && !self.startedLogin) {
+                self.startedLogin = true;
+
+                self.props.context.navigationUtility.navigateTo(
+                    Constants.routes.home.name,
+                    {afterLogin: true},
+                );
+            }
+        });
+    };
+
+    handleLoginError = (error) => {
+        var self = this;
+        window.setTimeout(function () {
+            self.loadingStatusSetter(false);
+            self.props.context.messageDisplayerUtility.displayErrorMessage(error);
+        }, 0);
     };
 
     render = () => {
