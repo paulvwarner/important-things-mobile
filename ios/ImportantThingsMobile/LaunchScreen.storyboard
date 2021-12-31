@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
@@ -14,20 +14,23 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="SplashLogo" translatesAutoresizingMaskIntoConstraints="NO" id="OL4-1u-CD9">
-                                <rect key="frame" x="4" y="236" width="366" height="194"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashLogo" translatesAutoresizingMaskIntoConstraints="NO" id="OL4-1u-CD9">
+                                <rect key="frame" x="12.666666666666657" y="325" width="365" height="194"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="366" id="IoO-ii-QHl"/>
+                                    <constraint firstAttribute="width" secondItem="OL4-1u-CD9" secondAttribute="height" multiplier="365:194" id="TRb-WX-d5O"/>
+                                    <constraint firstAttribute="height" constant="194" id="TvA-9s-DkI"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="OL4-1u-CD9" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="05K-F4-sA7"/>
-                            <constraint firstItem="OL4-1u-CD9" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" constant="4" id="GHw-b9-WjJ"/>
-                            <constraint firstItem="OL4-1u-CD9" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="aro-3g-RoB"/>
-                            <constraint firstItem="OL4-1u-CD9" firstAttribute="top" secondItem="Bcu-3y-fUS" secondAttribute="top" constant="236" id="qWR-ED-XBh"/>
+                            <constraint firstItem="OL4-1u-CD9" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Fzd-v3-whF"/>
+                            <constraint firstItem="OL4-1u-CD9" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="aeR-yq-xng"/>
                         </constraints>
                     </view>
                 </viewController>

@@ -260,7 +260,6 @@ export function constructStyle(textMultiplier, dimensions) {
             ...fontSize(14, 18),
         },
 
-
         defaultText: {
             ...regularFontFamily(),
             color: colors.black,
@@ -331,7 +330,6 @@ export function constructStyle(textMultiplier, dimensions) {
             position: 'relative',
         },
 
-
         loadingIndicatorOverlay: {
             flex: 1,
             flexDirection: 'column',
@@ -340,7 +338,7 @@ export function constructStyle(textMultiplier, dimensions) {
             left: 0,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: 'rgba(0, 0, 0, 0.6)',
+            backgroundColor: 'rgba(255, 255, 255, 0.6)',
             height: Dimensions.get('window').height,
             width: Dimensions.get('window').width,
             zIndex: 9999,

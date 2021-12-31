@@ -26,7 +26,6 @@ let _ = require('underscore');
 export let GlobalContext = React.createContext({});
 
 let loadingStatusValueManager = new CrossComponentValueManager();
-let overlayFadeRequestValueManager = new CrossComponentValueManager();
 let statusBarHeightValueManager = new CrossComponentValueManager();
 
 export let AppFrame = class extends Component {
@@ -116,7 +115,6 @@ export let AppFrame = class extends Component {
                     messageDisplayerUtility: messageDisplayerUtility,
                     navigationUtility: navigationUtility,
                     loadingStatusValueManager: loadingStatusValueManager,
-                    overlayFadeRequestValueManager: overlayFadeRequestValueManager,
                     statusBarHeightValueManager: statusBarHeightValueManager,
                 });
             })
@@ -200,7 +198,6 @@ export let AppFrame = class extends Component {
                                 messageDisplayerUtility: this.state.messageDisplayerUtility,
                                 navigationUtility: this.state.navigationUtility,
                                 loadingStatusValueManager: this.state.loadingStatusValueManager,
-                                overlayFadeRequestValueManager: this.state.overlayFadeRequestValueManager,
                                 statusBarHeightValueManager: this.state.statusBarHeightValueManager,
                             }}
                         >
