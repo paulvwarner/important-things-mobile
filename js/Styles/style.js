@@ -223,6 +223,20 @@ export function constructStyle(textMultiplier, dimensions) {
             position: 'relative',
             paddingTop: 40,
         },
+        loginScreenLogo: {
+            width: Dimensions.get('window').width - 160,
+            height: Dimensions.get('window').width - 160,
+            maxWidth: 200,
+            maxHeight: 200,
+            marginBottom: 20,
+        },
+        loginScreenLabel: {
+            textAlign: 'center',
+            ...tallText(),
+            ...bold(),
+            ...fontSize(26, 30),
+            marginBottom: 30,
+        },
         loginPageUsername: {
             marginTop: 10,
             marginBottom: 5,

@@ -10,6 +10,7 @@ import {
     TouchableOpacity,
     TouchableWithoutFeedback,
     View,
+    Image
 } from 'react-native';
 import {styleFunctions} from '../Styles/style';
 import {withContext} from '../Common/GlobalContextConsumerComponent';
@@ -238,7 +239,13 @@ export let LoginScreen = withContext(class extends React.Component {
                                                     style={style.loginPageMovingContent}
                                                 >
                                                     <View style={style.loginScreenContent}>
-
+                                                        <Image
+                                                            style={style.loginScreenLogo}
+                                                            source={require("../../images/logo.png")}
+                                                        />
+                                                        <DefaultText
+                                                            style={style.loginScreenLabel}
+                                                        >IMPORTANT THINGS</DefaultText>
                                                         <View style={style.loginPageFormContent}>
                                                             <TextInput
                                                                 allowFontScaling={false}
