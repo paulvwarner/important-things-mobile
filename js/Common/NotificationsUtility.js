@@ -35,4 +35,15 @@ export let NotificationsUtility = {
                 console.log('Error subscribing to important things topic:', error);
             });
     },
+
+    unsubscribeFromImportantThings: function () {
+        messaging()
+            .unsubscribeFromTopic(Constants.importantThingsTopic)
+            .then(function () {
+                console.log('Device unsubscribed from important things topic');
+            })
+            .catch(function (error) {
+                console.log('Error unsubscribing from important things topic:', error);
+            });
+    },
 };
