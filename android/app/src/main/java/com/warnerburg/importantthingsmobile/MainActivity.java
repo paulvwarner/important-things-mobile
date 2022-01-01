@@ -1,4 +1,4 @@
-package com.importantthingsmobile;
+package com.warnerburg.importantthingsmobile;
 
 import com.facebook.react.ReactActivity;
 

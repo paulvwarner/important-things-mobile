@@ -3,10 +3,16 @@ import React from 'react';
 import {DefaultText} from '../Common/DefaultText';
 import {withContext} from '../Common/GlobalContextConsumerComponent';
 import {AuthUtility} from '../Common/AuthUtility';
+import {NotificationsUtility} from '../Common/NotificationsUtility';
 
 export var HomeScreen = withContext(class extends React.Component {
     constructor(props) {
         super(props);
+
+        NotificationsUtility.requestUserPermission();
+        NotificationsUtility.handleForegroundMessages();
+        NotificationsUtility.subscribeToImportantThings();
+
         this.loadingStatusSetter = props.context.loadingStatusValueManager.createValueSetter();
         this.loadingStatusSetter(false);
     }
@@ -15,7 +21,13 @@ export var HomeScreen = withContext(class extends React.Component {
         return (
             <View>
                 <DefaultText>PVW TODO HOMESCREEN</DefaultText>
-                <TouchableOpacity onPress={AuthUtility.logout.bind(this,this.props.context.navigationUtility)}><View><DefaultText>LOG OUT</DefaultText></View></TouchableOpacity>
+                <TouchableOpacity
+                    onPress={AuthUtility.logout.bind(this, this.props.context.navigationUtility)}
+                >
+                    <View>
+                        <DefaultText>LOG OUT</DefaultText>
+                    </View>
+                </TouchableOpacity>
             </View>
         );
     };
