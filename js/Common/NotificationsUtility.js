@@ -1,4 +1,5 @@
 import messaging from '@react-native-firebase/messaging';
+import notifee from '@notifee/react-native';
 import {Constants} from './Constants';
 
 export let NotificationsUtility = {
@@ -16,6 +17,18 @@ export let NotificationsUtility = {
     handleForegroundMessages: function () {
         messaging().onMessage(async remoteMessage => {
             console.log('PVW got a foreground FCM message', remoteMessage);
+            const channelId = await notifee.createChannel({
+                id: 'default',
+                name: 'Default Channel',
+            });
+
+            await notifee.displayNotification({
+                body: remoteMessage.notification.body,
+                android: {
+                    channelId,
+                    smallIcon: 'ic_stat_name',
+                },
+            });
         });
     },
 
