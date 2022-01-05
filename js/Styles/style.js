@@ -35,12 +35,25 @@ export let colors = {
 
 export function constructDimensions(textMultiplier) {
     let loginPageTextInputHorizontalMargin = 30;
+
+    var commonScreenHeaderContentHorizontalPadding = 20;
+    var commonScreenHeaderContentWidth = Dimensions.get('window').width - (commonScreenHeaderContentHorizontalPadding * 2);
+
     return {
         defaultBottomScreenPadding: 60,
         gestureBarPaddingIOS: 35,
         nonNotchedPhoneStatusBarThreshold: 24,
         loginPageTextInputHorizontalMargin: loginPageTextInputHorizontalMargin,
         loginPageTextInputWidth: Dimensions.get('window').width - (loginPageTextInputHorizontalMargin * 2),
+
+        commonScreenHeaderHeight: 65,
+        commonScreenHeaderContentHorizontalPadding: commonScreenHeaderContentHorizontalPadding,
+        commonScreenHeaderContentWidth: commonScreenHeaderContentWidth,
+        commonScreenHeaderMainContentHeight: styleFunctions.getMultiplierDependentValue(textMultiplier, 50),
+
+        mainMenuPaneWidth: Dimensions.get('window').width * 4 / 5,
+        mainMenuOptionContainerRowHorizontalPadding: 20,
+        mainMenuOptionTextVerticalPadding: 10,
     };
 }
 
@@ -91,6 +104,20 @@ function regularFontFamily() {
         },
         android: {
             fontFamily: primaryFontFamilyAndroid,
+        },
+    });
+}
+
+function boxShadow() {
+    return Platform.select({
+        ios: {
+            shadowColor: '#000000',
+            shadowOffset: {width: 0, height: 3},
+            shadowOpacity: 0.2,
+            shadowRadius: 3,
+        },
+        android: {
+            elevation: 3,
         },
     });
 }
@@ -468,6 +495,170 @@ export function constructStyle(textMultiplier, dimensions) {
         loginButtonText: {
             ...bold(),
             ...tallText(),
+        },
+
+        // pvw todo - pare down to what's necessary
+        commonScreenContainer: {
+            position: 'relative',
+            flexDirection: 'column',
+            flex: 1,
+            width: Dimensions.get('window').width,
+            zIndex: 200,
+        },
+        commonScreenHeader: {
+            width: Dimensions.get('window').width,
+            flexDirection: 'column',
+            backgroundColor: colors.black,
+            position: 'relative',
+            zIndex: 9999,
+        },
+        commonScreenHeaderMain: {
+            flexDirection: 'column',
+            position: 'relative',
+            height: dimensions.commonScreenHeaderHeight,
+            justifyContent: 'flex-start',
+        },
+
+        commonScreenHeaderMainContent: {
+            flexDirection: 'row',
+            flex: 1,
+            height: dimensions.commonScreenHeaderMainContentHeight,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'transparent',
+        },
+        commonScreenHeaderLeft: {
+            paddingLeft: dimensions.commonScreenHeaderContentHorizontalPadding,
+            paddingRight: dimensions.commonScreenHeaderContentHorizontalPadding,
+            flexDirection: 'row',
+            flex: 1,
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            position: 'relative',
+            height: dimensions.commonScreenHeaderMainContentHeight,
+        },
+        commonScreenHeaderRight: {
+            flexDirection: 'row',
+            width: 50,
+            paddingRight: dimensions.commonScreenHeaderContentHorizontalPadding,
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+            position: 'relative',
+            height: dimensions.commonScreenHeaderMainContentHeight,
+        },
+        commonScreenHeaderTextContainer: {
+            flexDirection: 'row',
+            flex: 1,
+            paddingLeft: 8,
+            paddingRight: 8,
+            paddingTop: 4,
+            paddingBottom: 4,
+        },
+        commonScreenHeaderText: {
+            ...fontSize(12, 16),
+            ...bold(),
+            textAlign: 'left',
+            color: colors.white,
+            letterSpacing: 0,
+        },
+        headerMenuButton: {
+            alignItems: 'center',
+            justifyContent: 'center',
+        },
+        headerMenuImageContainer: {
+            width: 30,
+            height: 30,
+        },
+        homeScreenContainer: {
+            flexDirection: 'column',
+            flex: 1,
+            width: Dimensions.get('window').width,
+            position: 'relative',
+            zIndex: 100,
+        },
+
+        mainMenuPaneContainer: {
+            width: Dimensions.get('window').width,
+            flexDirection: 'column',
+            flex: 1,
+            position: 'absolute',
+            top: 0,
+            zIndex: 999,
+        },
+        mainMenuPane: {
+            position: 'absolute',
+            marginTop: dimensions.commonScreenHeaderHeight,
+            width: dimensions.mainMenuPaneWidth,
+            flexDirection: 'column',
+            flex: 1,
+            top: 0,
+            ...boxShadow(),
+        },
+        mainMenuOptionsContainer: {
+            flexDirection: 'column',
+            width: dimensions.mainMenuPaneWidth,
+            flex: 1,
+        },
+        mainMenuPaneContent: {
+            flexDirection: 'column',
+            width: dimensions.mainMenuPaneWidth,
+            backgroundColor: colors.white,
+            flex: 1,
+        },
+        mainMenuBottomContent: {
+            flexDirection: 'column',
+            width: dimensions.mainMenuPaneWidth,
+            height: 100,
+            justifyContent: 'flex-end',
+            alignItems: 'flex-start',
+            paddingLeft: 20,
+            marginBottom: dimensions.gestureBarPaddingIOS,
+        },
+        mainMenuLogo: {
+            width: 100,
+            height: 100,
+            resizeMode: 'contain',
+            marginBottom: 30,
+            flexDirection: 'column',
+        },
+        mainMenuAppVersionText: {
+            ...fontSize(18, 24),
+            textAlign: 'center',
+            flexDirection: 'column',
+        },
+        mainMenuContainer: {
+            flexDirection: 'column',
+        },
+        mainMenuOptionContainer: {
+            flexDirection: 'column',
+            width: dimensions.mainMenuPaneWidth,
+            paddingLeft: dimensions.mainMenuOptionContainerRowHorizontalPadding,
+            paddingRight: dimensions.mainMenuOptionContainerRowHorizontalPadding,
+        },
+        mainMenuOptionContainerRowFull: {
+            width: dimensions.mainMenuPaneWidth,
+            paddingLeft: dimensions.mainMenuOptionContainerRowHorizontalPadding,
+            paddingRight: dimensions.mainMenuOptionContainerRowHorizontalPadding,
+        },
+        mainMenuOptionOuterContainer: {
+            flexDirection: 'column',
+            borderBottomColor: colors.black,
+            borderBottomWidth: 1,
+        },
+        mainMenuOptionContent: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            backgroundColor: 'transparent',
+            minHeight: 40,
+        },
+        mainMenuOptionLabelText: {
+            flexDirection: 'row',
+            ...fontSize(20),
+            ...bold(),
+            ...tallText(),
+            color: colors.black,
+            paddingTop: dimensions.mainMenuOptionTextVerticalPadding,
+            paddingBottom: dimensions.mainMenuOptionTextVerticalPadding,
         },
     });
 }

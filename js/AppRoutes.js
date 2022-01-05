@@ -65,14 +65,14 @@ export let AppRoutes = withContext(class extends React.Component {
                                 screen: LoginScreen,
                                 params: commonRouteParams,
                                 navigationOptions: {
-                                    gesturesEnabled: false,
+                                    gestureEnabled: false,
                                 },
                             },
                             [Constants.routes.home.name]: {
                                 screen: HomeScreen,
                                 params: commonRouteParams,
                                 navigationOptions: {
-                                    gesturesEnabled: false,
+                                    gestureEnabled: false,
                                 },
                             },
                         },

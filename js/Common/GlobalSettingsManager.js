@@ -3,7 +3,7 @@ let commonProperties = {
 
 let local = {
     environment: 'local',
-    apiServerDomain: 'http://localhost:3000',
+    apiServerDomain: 'http://10.0.0.180:3000',
     fillUsername: 'paul.vincent.warner+m1@gmail.com',
     fillPassword: 'testuser1',
     debugLogger: {

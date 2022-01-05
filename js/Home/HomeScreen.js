@@ -4,6 +4,7 @@ import {DefaultText} from '../Common/DefaultText';
 import {withContext} from '../Common/GlobalContextConsumerComponent';
 import {AuthUtility} from '../Common/AuthUtility';
 import {NotificationsUtility} from '../Common/NotificationsUtility';
+import {CommonScreen} from '../Common/CommonScreen';
 
 export var HomeScreen = withContext(class extends React.Component {
     constructor(props) {
@@ -18,16 +19,21 @@ export var HomeScreen = withContext(class extends React.Component {
     }
 
     render = () => {
+        let style = this.props.context.style;
         return (
-            <View>
-                <DefaultText>PVW TODO HOMESCREEN</DefaultText>
-                <TouchableOpacity
-                    onPress={AuthUtility.logout.bind(this, this.props.context.navigationUtility)}
-                >
-                    <View>
-                        <DefaultText>LOG OUT</DefaultText>
+            <View style={style.screenFrame}>
+                <CommonScreen>
+                    <View style={style.homeScreenContainer}>
+                        <DefaultText>PVW TODO HOMESCREEN</DefaultText>
+                        <TouchableOpacity
+                            onPress={AuthUtility.logout.bind(this, this.props.context.navigationUtility)}
+                        >
+                            <View>
+                                <DefaultText>LOG OUT</DefaultText>
+                            </View>
+                        </TouchableOpacity>
                     </View>
-                </TouchableOpacity>
+                </CommonScreen>
             </View>
         );
     };

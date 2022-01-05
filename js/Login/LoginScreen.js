@@ -10,7 +10,7 @@ import {
     TouchableOpacity,
     TouchableWithoutFeedback,
     View,
-    Image
+    Image,
 } from 'react-native';
 import {styleFunctions} from '../Styles/style';
 import {withContext} from '../Common/GlobalContextConsumerComponent';
@@ -85,6 +85,7 @@ export let LoginScreen = withContext(class extends React.Component {
                     duration: 1000,
                     easing: Easing.linear,
                     delay: 0,
+                    useNativeDriver: true,
                 },
             ).start();
         }, 0);
@@ -186,6 +187,7 @@ export let LoginScreen = withContext(class extends React.Component {
                 duration: 500,
                 easing: Easing.linear,
                 delay: 0,
+                useNativeDriver: true
             },
         ).start();
 
@@ -197,6 +199,8 @@ export let LoginScreen = withContext(class extends React.Component {
                     Constants.routes.home.name,
                     {afterLogin: true},
                 );
+
+                self.state.viewOpacity.removeAllListeners();
             }
         });
     };
@@ -241,7 +245,7 @@ export let LoginScreen = withContext(class extends React.Component {
                                                     <View style={style.loginScreenContent}>
                                                         <Image
                                                             style={style.loginScreenLogo}
-                                                            source={require("../../images/logo.png")}
+                                                            source={require('../../images/logo.png')}
                                                         />
                                                         <DefaultText
                                                             style={style.loginScreenLabel}

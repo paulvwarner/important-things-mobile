@@ -13,6 +13,9 @@ export const Constants = {
             name: 'home',
             screenClassName: 'HomeScreen',
         },
+        logout: {
+            name: 'logout',
+        },
     },
 
     importantThingsTopic: 'importantthings',

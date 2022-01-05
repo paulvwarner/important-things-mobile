@@ -7,10 +7,14 @@ export var AuthUtility = {
         NotificationsUtility.unsubscribeFromImportantThings();
         Storage.delete(Constants.storage.loginData)
             .then(function () {
-                AuthUtility.routeToLogin(navigationUtility);
+                window.setTimeout(function () {
+                    AuthUtility.routeToLogin(navigationUtility);
+                }, 0);
             })
             .catch(function (error) {
-                AuthUtility.routeToLogin(navigationUtility);
+                window.setTimeout(function () {
+                    AuthUtility.routeToLogin(navigationUtility);
+                }, 0);
             });
     },
 
