@@ -1,6 +1,5 @@
 import React, {useContext, useRef} from 'react';
 import {View} from 'react-native';
-import {NavigationEvents} from 'react-navigation';
 import {CommonHeader} from './CommonHeader';
 import {MainMenuPane} from './MainMenuPane';
 import {GlobalContext} from '../AppFrame';
@@ -12,9 +11,6 @@ export let CommonScreen = function (props) {
 
     return (
         <View style={style.negativeFrameOver}>
-            <NavigationEvents
-                onWillFocus={props.onWillFocus || (() => null)}
-            />
             <CommonHeader
                 toggleMenu={function () {
                     toggleMenu.current();

@@ -71,13 +71,15 @@ export let LoginScreen = function (props) {
     }, []);
 
     useEffect(function () {
-        let lastLogoutTime = props.navigation.state.params.lastLogoutTime;
-        if (lastLogoutTime && lastLogoutTime !== formState.lastLogoutTime) {
-            mergeToFormState({lastLogoutTime: lastLogoutTime});
-            startedLogin.current = false;
-            showPageContent();
+        if (props.route.params) {
+            let lastLogoutTime = props.route.params.lastLogoutTime;
+            if (lastLogoutTime && lastLogoutTime !== formState.lastLogoutTime) {
+                mergeToFormState({lastLogoutTime: lastLogoutTime});
+                startedLogin.current = false;
+                showPageContent();
+            }
         }
-    }, [props.navigation.state.params.lastLogoutTime]);
+    }, [props.route.params && props.route.params.lastLogoutTime]);
 
     function showPageContent() {
         mergeToFormState({

@@ -497,7 +497,6 @@ export function constructStyle(textMultiplier, dimensions) {
             ...tallText(),
         },
 
-        // pvw todo - pare down to what's necessary
         commonScreenContainer: {
             position: 'relative',
             flexDirection: 'column',

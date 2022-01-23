@@ -15,7 +15,7 @@ import {AppRoutes} from './AppRoutes';
 import {getGlobalSettings} from './Common/GlobalSettingsManager';
 import {CrossComponentValueManager} from './Common/CrossComponentValueManager';
 import {colors, constructDimensions, constructStyle, styleFunctions} from './Styles/style';
-import React, {Component, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import 'react-native-gesture-handler';
 import {MessageDisplayerUtility} from './Common/MessageDisplayerUtility';
 import {AccessibilityUtility} from './Common/AccessibilityUtility';
@@ -80,7 +80,6 @@ export let AppFrame = function (props) {
             }, 0);
         }
     }, []);
-
 
     function setupAppFrame() {
         AccessibilityUtility.getTextMultiplier()

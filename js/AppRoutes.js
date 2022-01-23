@@ -1,100 +1,75 @@
-import {createAppContainer, NavigationActions} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
+import {createNavigationContainerRef, NavigationContainer, StackActions} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import {View} from 'react-native';
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Constants} from './Common/Constants';
 import {MessageDisplayingComponent} from './Common/MessageDisplayer';
-import {withContext} from './Common/GlobalContextConsumerComponent';
 import {LoginScreen} from './Login/LoginScreen';
 import {HomeScreen} from './Home/HomeScreen';
+import {GlobalContext} from './AppFrame';
 
 let _ = require('underscore');
+const navigationRef = createNavigationContainerRef();
 
-export let AppRoutes = withContext(class extends React.Component {
-    constructor(props) {
-        super(props);
-        let appRoutesComponent = this;
+export let AppRoutes = function (props) {
+    const context = useContext(GlobalContext);
+    let style = context.style;
 
+    useEffect(function () {
         // set up navigator
-        props.context.navigationUtility.setNavigator(
-            {
-                navigateTo: function (routeName, params) {
-                    this.commonNavigate(routeName, params, 'navigate');
-                },
-                goBack: function (routeName, params) {
-                    this.commonNavigate(null, null, 'back');
-                },
-                commonNavigate: function (routeName, params, navFunctionName) {
-                    let navigationAction;
-                    if (routeName) {
-                        navigationAction = NavigationActions[navFunctionName]({
-                            routeName: routeName,
-                            params: (params || {}),
-                        });
-                    } else {
-                        navigationAction = NavigationActions[navFunctionName]();
-                    }
-                    appRoutesComponent.navigator && appRoutesComponent.navigator.dispatch(navigationAction);
-                },
+        const navigator = {
+            navigateTo: function (routeName, params) {
+                if (navigationRef.isReady()) {
+                    navigationRef.navigate(routeName, params);
+                }
             },
-        );
-    }
+            goBack: function () {
+                if (navigationRef.isReady()) {
+                    navigationRef.dispatch(StackActions.pop());
+                }
+            },
+        };
 
-    render = () => {
-        let self = this;
-        let style = this.props.context.style;
+        context.navigationUtility.setNavigator(navigator);
+    }, []);
 
-        return (
-            <MessageDisplayingComponent
-                style={this.props.context.style.fullWindow}
-                renderer={(messageDisplayer) => {
-                    self.props.context.messageDisplayerUtility.setMessageDisplayer(messageDisplayer);
+    return (
+        <MessageDisplayingComponent
+            style={style.fullWindow}
+            renderer={(messageDisplayer) => {
+                context.messageDisplayerUtility.setMessageDisplayer(messageDisplayer);
+                const Stack = createStackNavigator();
 
-                    let commonRouteParams = {};
+                return (
+                    <View style={style.screenFrame}>
+                        <NavigationContainer ref={navigationRef}>
+                            <Stack.Navigator
+                                initialRouteName={Constants.routes.login.name}
+                                screenOptions={{headerShown: false}}
+                            >
+                                <Stack.Screen
+                                    name={Constants.routes.login.name}
+                                    component={LoginScreen}
+                                    options={{
+                                        gestureEnabled: false,
+                                    }}
+                                />
+                                <Stack.Screen
+                                    name={Constants.routes.home.name}
+                                    component={HomeScreen}
+                                    options={{
+                                        gestureEnabled: false,
+                                    }}
+                                />
+                            </Stack.Navigator>
+                        </NavigationContainer>
+                    </View>
+                );
+            }}
+        >
 
-                    let initialRoute = Constants.routes.login;
+        </MessageDisplayingComponent>
+    );
+};
 
-                    let stackNavigatorConfig = {
-                        headerMode: 'none',
-                        initialRouteName: initialRoute.name,
-                    };
-
-                    const AppNavigator = createStackNavigator(
-                        {
-                            [Constants.routes.login.name]: {
-                                screen: LoginScreen,
-                                params: commonRouteParams,
-                                navigationOptions: {
-                                    gestureEnabled: false,
-                                },
-                            },
-                            [Constants.routes.home.name]: {
-                                screen: HomeScreen,
-                                params: commonRouteParams,
-                                navigationOptions: {
-                                    gestureEnabled: false,
-                                },
-                            },
-                        },
-                        stackNavigatorConfig,
-                    );
-
-                    const AppNavigationContainer = createAppContainer(AppNavigator);
-
-                    return (
-                        <View style={style.screenFrame}>
-                            <AppNavigationContainer
-                                ref={(elem) => {
-                                    this.navigator = elem;
-                                }}
-                            />
-                        </View>
-                    );
-                }}
-            >
-
-            </MessageDisplayingComponent>
-        );
-    };
-});
 

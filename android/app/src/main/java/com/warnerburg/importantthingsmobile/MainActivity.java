@@ -1,3 +1,4 @@
+import android.os.Bundle;
 package com.warnerburg.importantthingsmobile;
 
 import com.facebook.react.ReactActivity;
@@ -11,5 +12,10 @@ public class MainActivity extends ReactActivity {
   @Override
   protected String getMainComponentName() {
     return "ImportantThingsMobile";
+  }
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(null);
   }
 }
