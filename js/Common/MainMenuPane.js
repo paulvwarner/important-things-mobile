@@ -1,119 +1,108 @@
-import React from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import {Animated, Dimensions, Easing, Image, View} from 'react-native';
-import {withContext} from './GlobalContextConsumerComponent';
 import {MainMenu} from './MainMenu';
 import {DefaultText} from './DefaultText';
 import DeviceInfo from 'react-native-device-info';
+import {GlobalContext} from '../AppFrame';
 
-export var MainMenuPane = withContext(class extends React.Component {
-    constructor(props) {
-        super(props);
-        var self = this;
-        var dimensions = props.context.dimensions;
+export let MainMenuPane = function (props) {
+    const context = useContext(GlobalContext);
+    let style = context.style;
+    let dimensions = context.dimensions;
 
-        this.menuHiddenLeft = -1 * dimensions.mainMenuPaneWidth;
-        this.leftOffsetValue = this.menuHiddenLeft;
-        this.menuShowingLeft = 0;
+    const menuHiddenLeft = -1 * dimensions.mainMenuPaneWidth;
+    const menuShowingLeft = 0;
+    const leftOffsetValue = useRef(menuHiddenLeft);
 
-        this.state = {
-            leftOffset: new Animated.Value(this.menuHiddenLeft),
-        };
-        this.state.leftOffset.addListener(({value}) => self.leftOffsetValue = value);
-    }
+    const [leftOffset, setLeftOffset] = useState(new Animated.Value(menuHiddenLeft));
 
-    componentDidMount = () => {
-        if (this.props.passRef) {
-            this.props.passRef(this);
-        }
-    };
+    leftOffset.addListener(({value}) => leftOffsetValue.current = value);
 
-    toggleMenu = () => {
-        var self = this;
+    function toggleMenu() {
         window.setTimeout(function () {
-            if (self.leftOffsetValue === self.menuHiddenLeft) {
-                self.openMenu();
+            if (leftOffsetValue.current === menuHiddenLeft) {
+                openMenu();
             } else {
-                self.closeMenu();
+                closeMenu();
             }
         }, 0);
-    };
+    }
 
-    openMenu = () => {
+    // pass toggleMenu function to parent using ref defined in parent
+    useEffect(function () {
+        if (props.toggleMenu) {
+            props.toggleMenu.current = toggleMenu;
+        }
+    }, []);
+
+    function openMenu() {
         Animated.timing(
-            this.state.leftOffset,
+            leftOffset,
             {
-                toValue: this.menuShowingLeft,
+                toValue: menuShowingLeft,
                 duration: 150,
                 easing: Easing.inOut(Easing.ease),
                 delay: 0,
                 useNativeDriver: true,
             },
         ).start();
-    };
+    }
 
-    closeMenu = () => {
+    function closeMenu() {
         Animated.timing(
-            this.state.leftOffset,
+            leftOffset,
             {
-                toValue: this.menuHiddenLeft,
+                toValue: menuHiddenLeft,
                 duration: 150,
                 easing: Easing.inOut(Easing.ease),
                 delay: 0,
                 useNativeDriver: true,
             },
         ).start();
-    };
+    }
 
-    render = () => {
-        var self = this;
-        var style = this.props.context.style;
-        var dimensions = this.props.context.dimensions;
-        var appVersionText = 'App Version ' +
-            DeviceInfo.getReadableVersion() +
-            '  (' +
-            this.props.context.globalSettings.environment.toUpperCase() +
-            ')';
+    let appVersionText = 'App Version ' +
+        DeviceInfo.getReadableVersion() +
+        '  (' +
+        context.globalSettings.environment.toUpperCase() +
+        ')';
 
-        return (
-            <View style={style.mainMenuPaneContainer} pointerEvents="box-none">
-                <Animated.View
-                    style={[
-                        style.mainMenuPane,
-                        {
-                            transform: [{translateX: this.state.leftOffset}],
-                            height: Dimensions.get('window').height -
-                                dimensions.commonScreenHeaderHeight -
-                                this.props.context.statusBarHeightValueManager.value,
-                        },
-                    ]}
-                    transparent={true}
-                >
-                    <View style={style.mainMenuPaneContent}>
-                        <View style={style.mainMenuOptionsContainer}>
-                            <MainMenu
-                                postNavigateCallback={function () {
-                                    self.closeMenu();
-                                }}
-                            />
-                        </View>
-                        <View
-                            style={[
-                                style.mainMenuBottomContent,
-                                {marginBottom: dimensions.gestureBarPaddingIOS},
-                            ]}
-                        >
-                            <Image
-                                style={style.mainMenuLogo}
-                                source={require('../../images/logo.png')}
-                            />
-                            <DefaultText
-                                style={style.mainMenuAppVersionText}
-                            >{appVersionText}</DefaultText>
-                        </View>
+    return (
+        <View style={style.mainMenuPaneContainer} pointerEvents="box-none">
+            <Animated.View
+                style={[
+                    style.mainMenuPane,
+                    {
+                        transform: [{translateX: leftOffset}],
+                        height: Dimensions.get('window').height -
+                            dimensions.commonScreenHeaderHeight -
+                            context.statusBarHeightValueManager.value,
+                    },
+                ]}
+                transparent={true}
+            >
+                <View style={style.mainMenuPaneContent}>
+                    <View style={style.mainMenuOptionsContainer}>
+                        <MainMenu
+                            postNavigateCallback={closeMenu}
+                        />
                     </View>
-                </Animated.View>
-            </View>
-        );
-    };
-});
-
+                    <View
+                        style={[
+                            style.mainMenuBottomContent,
+                            {marginBottom: dimensions.gestureBarPaddingIOS},
+                        ]}
+                    >
+                        <Image
+                            style={style.mainMenuLogo}
+                            source={require('../../images/logo.png')}
+                        />
+                        <DefaultText
+                            style={style.mainMenuAppVersionText}
+                        >{appVersionText}</DefaultText>
+                    </View>
+                </View>
+            </Animated.View>
+        </View>
+    );
+};

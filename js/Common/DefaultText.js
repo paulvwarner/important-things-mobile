@@ -1,19 +1,18 @@
-import React from "react";
-import {Text} from "react-native";
-import {withContext} from './GlobalContextConsumerComponent';
+import React, {useContext} from 'react';
+import {Text} from 'react-native';
+import {GlobalContext} from '../AppFrame';
 
-export var DefaultText = withContext(class extends React.Component {
-    render = function () {
-        return (
-            <Text
-                allowFontScaling={false}
-                style={[this.props.context.style.defaultText, this.props.style]}
-                numberOfLines={this.props.numberOfLines}
-                adjustsFontSizeToFit={this.props.adjustsFontSizeToFit}
-            >
-                {'' + this.props.children}
-            </Text>
-        );
-    }
-});
+export let DefaultText = function (props) {
+    const context = useContext(GlobalContext);
+    return (
+        <Text
+            allowFontScaling={false}
+            style={[context.style.defaultText, props.style]}
+            numberOfLines={props.numberOfLines}
+            adjustsFontSizeToFit={props.adjustsFontSizeToFit}
+        >
+            {'' + props.children}
+        </Text>
+    );
+};
 

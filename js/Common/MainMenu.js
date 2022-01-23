@@ -1,75 +1,74 @@
 import {TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
 import {DefaultText} from './DefaultText';
-import {withContext} from './GlobalContextConsumerComponent';
 import {Constants} from './Constants';
 import {AuthUtility} from './AuthUtility';
+import {GlobalContext} from '../AppFrame';
 
 var _ = require('underscore');
 
-export var MainMenu = withContext(class extends React.Component {
-    navigateTo = (route, routeParams) => {
-        var self = this;
-        if (route && route.name && route.name === Constants.routes.logout.name) {
-            AuthUtility.logout(self.props.context.navigationUtility);
+export let MainMenu = function (props) {
+    const context = useContext(GlobalContext);
+    let style = context.style;
+    const routes = Constants.routes;
 
-            if (this.props.postNavigateCallback) {
-                this.props.postNavigateCallback();
+    function navigateTo(route, routeParams) {
+        if (route && route.name && route.name === Constants.routes.logout.name) {
+            AuthUtility.logout(context.navigationUtility);
+
+            if (props.postNavigateCallback) {
+                props.postNavigateCallback();
             }
         } else {
-            this.props.context.navigationUtility.navigateTo(
+            props.context.navigationUtility.navigateTo(
                 route.name,
             );
 
-            if (this.props.postNavigateCallback) {
-                this.props.postNavigateCallback();
+            if (props.postNavigateCallback) {
+                props.postNavigateCallback();
             }
         }
-    };
+    }
 
-    render = () => {
-        var style = this.props.context.style;
-        const routes = Constants.routes;
+    const menuItems = [
+        {
+            route: routes.home,
+            label: 'Home',
+        },
+        {
+            route: routes.logout,
+            label: 'Log Out',
+        },
+    ];
 
-        const menuItems = [
-            {
-                route: routes.home,
-                label: 'Home',
-            },
-            {
-                route: routes.logout,
-                label: 'Log Out',
-            },
-        ];
+    let menuItemComponents = [];
 
-        var menuItemComponents = [];
-
-        for (var i = 0; i < menuItems.length; i++) {
-            var menuItem = menuItems[i];
-            menuItemComponents.push(
-                <View
-                    key={i}
-                    style={style.mainMenuOptionOuterContainer}
+    for (let i = 0; i < menuItems.length; i++) {
+        var menuItem = menuItems[i];
+        menuItemComponents.push(
+            <View
+                key={i}
+                style={style.mainMenuOptionOuterContainer}
+            >
+                <TouchableOpacity
+                    style={style.mainMenuOptionContainer}
+                    onPress={navigateTo.bind(null, menuItem.route, menuItem.params)}
                 >
-                    <TouchableOpacity
-                        style={style.mainMenuOptionContainer}
-                        onPress={this.navigateTo.bind(this, menuItem.route, menuItem.params)}
-                    >
-                        <View style={style.mainMenuOptionContent}>
-                                <DefaultText
-                                    style={style.mainMenuOptionLabelText}
-                                >{menuItem.label}</DefaultText>
-                        </View>
-                    </TouchableOpacity>
-                </View>
-            )
-        }
-
-        return (
-            <View style={style.mainMenuContainer}>
-                {menuItemComponents}
-            </View>
+                    <View style={style.mainMenuOptionContent}>
+                        <DefaultText
+                            style={style.mainMenuOptionLabelText}
+                        >{menuItem.label}</DefaultText>
+                    </View>
+                </TouchableOpacity>
+            </View>,
         );
     }
-});
+
+    return (
+        <View style={style.mainMenuContainer}>
+            {menuItemComponents}
+        </View>
+    );
+
+};
 

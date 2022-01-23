@@ -6,13 +6,9 @@ import {MainMenuPane} from './MainMenuPane';
 import {GlobalContext} from '../AppFrame';
 
 export let CommonScreen = function (props) {
-    const mainMenuPane = useRef(null);
+    const toggleMenu = useRef(null);
     const context = useContext(GlobalContext);
     let style = context.style;
-
-    function toggleMenu() {
-        mainMenuPane.current.toggleMenu();
-    }
 
     return (
         <View style={style.negativeFrameOver}>
@@ -20,15 +16,15 @@ export let CommonScreen = function (props) {
                 onWillFocus={props.onWillFocus || (() => null)}
             />
             <CommonHeader
-                toggleMenu={toggleMenu}
+                toggleMenu={function () {
+                    toggleMenu.current();
+                }}
             />
             <View style={style.commonScreenContainer}>
                 {props.children}
             </View>
             <MainMenuPane
-                passRef={(elem) => {
-                    mainMenuPane.current = elem;
-                }}
+                toggleMenu={toggleMenu}
             />
         </View>
     );
