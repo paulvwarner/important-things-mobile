@@ -1,85 +1,95 @@
-import React from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import {DefaultText} from '../Common/DefaultText';
 import {
     Animated,
     Dimensions,
     Easing,
+    Image,
     Keyboard,
     KeyboardAvoidingView,
     TextInput,
     TouchableOpacity,
     TouchableWithoutFeedback,
     View,
-    Image,
 } from 'react-native';
 import {styleFunctions} from '../Styles/style';
-import {withContext} from '../Common/GlobalContextConsumerComponent';
 import {Constants} from '../Common/Constants';
 import {Storage} from '../Common/Storage';
+import {GlobalContext} from '../AppFrame';
 
-export let LoginScreen = withContext(class extends React.Component {
-    constructor(props) {
-        super(props);
-        let self = this;
+export let LoginScreen = function (props) {
+    const mounted = useRef(true);
+    const startedLogin = useRef(false);
+    const passwordField = useRef(null);
+    const context = useContext(GlobalContext);
+    let style = context.style;
+    let loadingStatusSetter = context.loadingStatusValueManager.createValueSetter();
 
-        this.loadingStatusSetter = props.context.loadingStatusValueManager.createValueSetter();
+    let [formState, setFormState] = useState({
+        username: context.globalSettings.fillUsername,
+        password: context.globalSettings.fillPassword,
+        viewOpacity: new Animated.Value(0.0),
+        statusBarHeight: styleFunctions.getMinimumStatusBarHeight(),
+        lastLogoutTime: (new Date()).getTime(),
+        showPageContent: false,
+    });
 
-        self.loadingStatusSetter(true);
+    function mergeToFormState(stateChange) {
+        if (stateChange) {
+            setFormState(
+                {
+                    ...formState,
+                    ...stateChange,
+                },
+            );
+        }
+    }
+
+    useEffect(function () {
+        mounted.current = true;
+        loadingStatusSetter(true);
 
         window.setTimeout(function () {
-            self.checkIfLoggedIn()
+            checkIfLoggedIn()
                 .then(function (loginData) {
                     if (loginData) {
-                        self.loadingStatusSetter(true);
-                        self.handleLoginSuccess(loginData);
+                        loadingStatusSetter(true);
+                        handleLoginSuccess(loginData);
                     } else {
-                        self.showPageContent();
+                        showPageContent();
                     }
                 })
                 .catch(function (error) {
                     console.log('ERROR during login check: ', error);
-                    self.showPageContent();
+                    showPageContent();
                 });
         }, 0);
 
-        this.state = {
-            username: this.props.context.globalSettings.fillUsername,
-            password: this.props.context.globalSettings.fillPassword,
-            viewOpacity: new Animated.Value(0.0),
-            statusBarHeight: styleFunctions.getMinimumStatusBarHeight(),
+        return function () {
+            mounted.current = false;
         };
-    }
+    }, []);
 
-    componentDidMount = () => {
-        this.mounted = true;
-    };
-
-    componentWillUnmount = () => {
-        this.mounted = false;
-    };
-
-    componentDidUpdate = (prevProps, prevState, snapshot) => {
-        var self = this;
-        var params = this.props.navigation.state.params;
-        if (params.lastLogoutTime !== prevProps.navigation.state.params.lastLogoutTime) {
-            this.startedLogin = false;
-            this.showPageContent();
+    useEffect(function () {
+        let lastLogoutTime = props.navigation.state.params.lastLogoutTime;
+        if (lastLogoutTime && lastLogoutTime !== formState.lastLogoutTime) {
+            mergeToFormState({lastLogoutTime: lastLogoutTime});
+            startedLogin.current = false;
+            showPageContent();
         }
-    };
+    }, [props.navigation.state.params.lastLogoutTime]);
 
-    showPageContent = () => {
-        let self = this;
-
-        self.setState({
+    function showPageContent() {
+        mergeToFormState({
             showPageContent: true,
         });
 
         window.setTimeout(function () {
-            self.loadingStatusSetter(false);
+            loadingStatusSetter(false);
 
             // fade in
             Animated.timing(
-                self.state.viewOpacity,
+                formState.viewOpacity,
                 {
                     toValue: 1.0,
                     duration: 1000,
@@ -89,29 +99,29 @@ export let LoginScreen = withContext(class extends React.Component {
                 },
             ).start();
         }, 0);
-    };
+    }
 
-    onTouchOutsideInput = () => {
+    function onTouchOutsideInput() {
         Keyboard.dismiss();
-    };
+    }
 
-    handleUsernameSubmit = () => {
+    function handleUsernameSubmit() {
         try {
-            this.passwordField.focus();
+            passwordField.current.focus();
         } catch (e) {
             console && console.log('Couldn\'t focus password field: ', e.message);
         }
-    };
+    }
 
-    handleValueChange = (field, text) => {
-        let nextState = {};
-        nextState[field] = text;
-        if (this.mounted) {
-            this.setState(nextState);
+    function handleValueChange(field, text) {
+        let stateChange = {};
+        stateChange[field] = text;
+        if (mounted.current) {
+            mergeToFormState(stateChange);
         }
-    };
+    }
 
-    checkIfLoggedIn = () => {
+    function checkIfLoggedIn() {
         return new Promise(function (resolve, reject) {
             Storage.get(Constants.storage.loginData)
                 .then(function (loginData) {
@@ -126,23 +136,24 @@ export let LoginScreen = withContext(class extends React.Component {
                     resolve(false);
                 });
         });
-    };
+    }
 
-    login = () => {
-        var self = this;
-        var apiUtility = this.props.context.apiUtility;
-        apiUtility.setNavigationUtility(this.props.context.navigationUtility);
+    function login() {
+        var apiUtility = context.apiUtility;
+        apiUtility.setNavigationUtility(context.navigationUtility);
         Keyboard.dismiss();
 
-        if (this.state.username && ('' + this.state.username).trim().length > 0 &&
-            this.state.password && ('' + this.state.password).trim().length > 0) {
+        if (
+            formState.username && ('' + formState.username).trim().length > 0 &&
+            formState.password && ('' + formState.password).trim().length > 0
+        ) {
 
-            this.loadingStatusSetter(true);
+            loadingStatusSetter(true);
             try {
-                apiUtility.login(this.state.username, this.state.password)
+                apiUtility.login(formState.username, formState.password)
                     .then(function (loginData) {
                         if (loginData.user && loginData.user.authentication_token) {
-                            self.handleLoginSuccess(loginData);
+                            handleLoginSuccess(loginData);
                         } else {
                             if (loginData.message) {
                                 throw new Error(loginData.message);
@@ -159,29 +170,28 @@ export let LoginScreen = withContext(class extends React.Component {
                             error.message === Constants.errorMessages.userDeactivatedLogin ||
                             error.message === Constants.errorMessages.userCannotUseApp
                         )) {
-                            self.handleLoginError(error.message);
+                            handleLoginError(error.message);
                         } else {
-                            self.handleLoginError('An error occurred during login.');
+                            handleLoginError('An error occurred during login.');
                         }
                     });
             } catch (error) {
-                this.handleLoginError(error);
+                handleLoginError(error);
             }
         } else {
-            self.props.context.messageDisplayerUtility.displayErrorMessage('Please enter both a username and a password.');
+            context.messageDisplayerUtility.displayErrorMessage('Please enter both a username and a password.');
         }
-    };
+    }
 
-    handleLoginSuccess = (loginData) => {
-        var self = this;
-        var apiUtility = this.props.context.apiUtility;
+    function handleLoginSuccess(loginData) {
+        var apiUtility = context.apiUtility;
 
         apiUtility.setToken(loginData.user.authentication_token);
         apiUtility.setLoginData(loginData);
 
         // fade out, then go to next screen
         Animated.timing(
-            this.state.viewOpacity,
+            formState.viewOpacity,
             {
                 toValue: 0.0,
                 duration: 500,
@@ -191,142 +201,129 @@ export let LoginScreen = withContext(class extends React.Component {
             },
         ).start();
 
-        self.state.viewOpacity.addListener(() => {
-            if (self.state.viewOpacity._value === 0 && !self.startedLogin) {
-                self.startedLogin = true;
+        formState.viewOpacity.addListener(() => {
+            if (formState.viewOpacity._value === 0 && !startedLogin.current) {
+                startedLogin.current = true;
 
-                self.props.context.navigationUtility.navigateTo(
+                context.navigationUtility.navigateTo(
                     Constants.routes.home.name,
                     {afterLogin: true},
                 );
 
-                self.state.viewOpacity.removeAllListeners();
+                formState.viewOpacity.removeAllListeners();
             }
         });
-    };
+    }
 
-    handleLoginError = (error) => {
-        var self = this;
+    function handleLoginError(error) {
         window.setTimeout(function () {
-            self.loadingStatusSetter(false);
-            self.props.context.messageDisplayerUtility.displayErrorMessage(error);
+            loadingStatusSetter(false);
+            context.messageDisplayerUtility.displayErrorMessage(error);
         }, 0);
-    };
+    }
 
-    render = () => {
-        let self = this;
-        let style = this.props.context.style;
 
-        let underlineColorAndroid = 'transparent';
+    let underlineColorAndroid = 'transparent';
 
-        return (
-            <View style={style.screenFrame}>
-                <TouchableWithoutFeedback
-                    style={[style.fullWindow]}
-                    onPress={this.onTouchOutsideInput}
-                >
-                    <View style={[style.columnView, style.loginScreenContainer]}>
-                        {(() => {
-                            if (this.state.showPageContent) {
-                                return (
-                                    <Animated.View style={[
-                                        style.frameViewStyle,
-                                        {opacity: this.state.viewOpacity},
-                                    ]}>
-                                        <TouchableWithoutFeedback
-                                            style={[style.fullWindow, style.loginWindow]}
-                                            onPress={this.onTouchOutsideInput}>
-                                            <View style={style.loginPageStyle}>
-                                                <KeyboardAvoidingView
-                                                    behavior={'position'}
-                                                    keyboardVerticalOffset={-1 * Dimensions.get('window').height / 3.5}
-                                                    style={style.loginPageMovingContent}
-                                                >
-                                                    <View style={style.loginScreenContent}>
-                                                        <Image
-                                                            style={style.loginScreenLogo}
-                                                            source={require('../../images/logo.png')}
+    return (
+        <View style={style.screenFrame}>
+            <TouchableWithoutFeedback
+                style={style.fullWindow}
+                onPress={onTouchOutsideInput}
+            >
+                <View style={[style.columnView, style.loginScreenContainer]}>
+                    {(() => {
+                        if (formState.showPageContent) {
+                            return (
+                                <Animated.View style={[
+                                    style.frameViewStyle,
+                                    {opacity: formState.viewOpacity},
+                                ]}>
+                                    <TouchableWithoutFeedback
+                                        style={[style.fullWindow, style.loginWindow]}
+                                        onPress={onTouchOutsideInput}>
+                                        <View style={style.loginPageStyle}>
+                                            <KeyboardAvoidingView
+                                                behavior={'position'}
+                                                keyboardVerticalOffset={-1 * Dimensions.get('window').height / 3.5}
+                                                style={style.loginPageMovingContent}
+                                            >
+                                                <View style={style.loginScreenContent}>
+                                                    <Image
+                                                        style={style.loginScreenLogo}
+                                                        source={require('../../images/logo.png')}
+                                                    />
+                                                    <DefaultText
+                                                        style={style.loginScreenLabel}
+                                                    >IMPORTANT THINGS</DefaultText>
+                                                    <View style={style.loginPageFormContent}>
+                                                        <TextInput
+                                                            allowFontScaling={false}
+                                                            autoCorrect={false}
+                                                            underlineColorAndroid={underlineColorAndroid}
+                                                            autoCapitalize={'none'}
+                                                            style={[
+                                                                style.defaultTextInput,
+                                                                style.loginPageTextInput,
+                                                                style.loginPageUsername,
+                                                            ]}
+                                                            value={formState.username}
+                                                            onChangeText={handleValueChange.bind(null, 'username')}
+                                                            placeholder="Username"
+                                                            returnKeyType="next"
+                                                            onSubmitEditing={handleUsernameSubmit}
                                                         />
-                                                        <DefaultText
-                                                            style={style.loginScreenLabel}
-                                                        >IMPORTANT THINGS</DefaultText>
-                                                        <View style={style.loginPageFormContent}>
-                                                            <TextInput
-                                                                allowFontScaling={false}
-                                                                autoCorrect={false}
-                                                                underlineColorAndroid={underlineColorAndroid}
-                                                                autoCapitalize={'none'}
-                                                                style={[
-                                                                    style.defaultTextInput,
-                                                                    style.loginPageTextInput,
-                                                                    style.loginPageUsername,
-                                                                ]}
-                                                                value={self.state.username}
-                                                                onChangeText={self.handleValueChange.bind(self, 'username')}
-                                                                placeholder="Username"
-                                                                returnKeyType="next"
-                                                                onSubmitEditing={(event) => {
-                                                                    self.handleUsernameSubmit();
-                                                                }}
-                                                            />
-                                                            <TextInput
-                                                                allowFontScaling={false}
-                                                                autoCorrect={false}
-                                                                autoCapitalize="none"
-                                                                autoComplete="off"
-                                                                underlineColorAndroid={underlineColorAndroid}
-                                                                ref={(element) => {
-                                                                    this.passwordField = element;
-                                                                }}
-                                                                secureTextEntry={true}
-                                                                style={[
-                                                                    style.defaultTextInput,
-                                                                    style.loginPageTextInput,
-                                                                    style.loginPagePassword,
-                                                                ]}
-                                                                value={self.state.password}
-                                                                onChangeText={self.handleValueChange.bind(self, 'password')}
-                                                                placeholder="Password"
-                                                                returnKeyType="go"
-                                                                onSubmitEditing={(event) => {
-                                                                    self.login();
-                                                                }}
-                                                            />
+                                                        <TextInput
+                                                            allowFontScaling={false}
+                                                            autoCorrect={false}
+                                                            autoCapitalize="none"
+                                                            autoComplete="off"
+                                                            underlineColorAndroid={underlineColorAndroid}
+                                                            ref={passwordField}
+                                                            secureTextEntry={true}
+                                                            style={[
+                                                                style.defaultTextInput,
+                                                                style.loginPageTextInput,
+                                                                style.loginPagePassword,
+                                                            ]}
+                                                            value={formState.password}
+                                                            onChangeText={handleValueChange.bind(null, 'password')}
+                                                            placeholder="Password"
+                                                            returnKeyType="go"
+                                                            onSubmitEditing={login}
+                                                        />
 
-                                                            <TouchableOpacity
-                                                                onPress={self.login}
+                                                        <TouchableOpacity
+                                                            onPress={login}
+                                                            style={[
+                                                                style.pillButtonContainer,
+                                                                style.loginButtonContainer,
+                                                            ]}
+                                                        >
+                                                            <View
                                                                 style={[
-                                                                    style.pillButtonContainer,
-                                                                    style.loginButtonContainer,
-                                                                ]}
-                                                            >
-                                                                <View
+                                                                    style.pillButton,
+                                                                    style.loginButton,
+                                                                ]}>
+                                                                <DefaultText
                                                                     style={[
-                                                                        style.pillButton,
-                                                                        style.loginButton,
-                                                                    ]}>
-                                                                    <DefaultText
-                                                                        style={[
-                                                                            style.pillButtonText,
-                                                                            style.loginButtonText,
-                                                                        ]}
-                                                                    >LOGIN</DefaultText>
-                                                                </View>
-                                                            </TouchableOpacity>
-                                                        </View>
+                                                                        style.pillButtonText,
+                                                                        style.loginButtonText,
+                                                                    ]}
+                                                                >LOGIN</DefaultText>
+                                                            </View>
+                                                        </TouchableOpacity>
                                                     </View>
-                                                </KeyboardAvoidingView>
-                                            </View>
-                                        </TouchableWithoutFeedback>
-                                    </Animated.View>
-                                );
-                            }
-                        })()}
-                    </View>
-                </TouchableWithoutFeedback>
-            </View>
-        );
-    };
-});
-
-
+                                                </View>
+                                            </KeyboardAvoidingView>
+                                        </View>
+                                    </TouchableWithoutFeedback>
+                                </Animated.View>
+                            );
+                        }
+                    })()}
+                </View>
+            </TouchableWithoutFeedback>
+        </View>
+    );
+};

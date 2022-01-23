@@ -1,13 +1,13 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Constants} from './Constants';
 
-export var Storage = {
+export let Storage = {
     get: function (key) {
         return new Promise(function (resolve, reject) {
             AsyncStorage.getItem(Constants.storagePrefix + key)
                 .then(function (data) {
                     if (data) {
-                        var returnData = JSON.parse(data);
+                        let returnData = JSON.parse(data);
                         window.setTimeout(function () {
                             resolve(returnData);
                         }, 0);

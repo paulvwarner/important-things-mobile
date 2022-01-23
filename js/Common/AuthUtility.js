@@ -2,7 +2,7 @@ import {Constants} from './Constants';
 import {Storage} from './Storage';
 import {NotificationsUtility} from './NotificationsUtility';
 
-export var AuthUtility = {
+export let AuthUtility = {
     logout: function (navigationUtility) {
         NotificationsUtility.unsubscribeFromImportantThings();
         Storage.delete(Constants.storage.loginData)

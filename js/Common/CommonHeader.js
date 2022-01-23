@@ -7,7 +7,7 @@ import {GlobalContext} from '../AppFrame';
 
 export let CommonHeader = function (props) {
     const context = useContext(GlobalContext);
-    var style = context.style;
+    let style = context.style;
 
     return (
         <View style={style.commonScreenHeader}>

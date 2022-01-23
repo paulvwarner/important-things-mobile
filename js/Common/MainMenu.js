@@ -20,7 +20,7 @@ export let MainMenu = function (props) {
                 props.postNavigateCallback();
             }
         } else {
-            props.context.navigationUtility.navigateTo(
+            context.navigationUtility.navigateTo(
                 route.name,
             );
 

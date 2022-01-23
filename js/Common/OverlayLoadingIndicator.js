@@ -1,75 +1,77 @@
-import React from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import {ActivityIndicator, Animated, Easing} from 'react-native';
 import {colors} from '../Styles/style';
 import {withContext} from './GlobalContextConsumerComponent';
+import {GlobalContext} from '../AppFrame';
 
-export let OverlayLoadingIndicator = withContext(class extends React.Component {
-    constructor(props) {
-        super(props);
+export let OverlayLoadingIndicator = function (props) {
+    const mounted = useRef(true);
+    const context = useContext(GlobalContext);
+    context.loadingStatusValueManager.reactToValueChangeWith(processLoadingStatusValueChange);
+    let style = context.style;
 
-        if (props.context.loadingStatusValueManager) {
-            props.context.loadingStatusValueManager.reactToValueChangeWith(this.processLoadingStatusValueChange);
-        }
+    const [loadingIndicatorState, setLoadingIndicatorState] = useState({
+        loading: false,
+        viewOpacity: new Animated.Value(0.0),
+    });
 
-        this.state = {
-            loading: false,
-            viewOpacity: new Animated.Value(0.0),
-        };
-    };
-
-    componentDidMount = () => {
-        this.mounted = true;
-    };
-
-    componentWillUnmount = () => {
-        this.mounted = false;
-    };
-
-    processLoadingStatusValueChange = (loading) => {
-        if (this.state) {
-            let self = this;
-
-            if (this.state.loading !== loading) {
-                // do the state change after all current in-progress rendering is complete (timeout ensures this)
-                window.setTimeout(function () {
-                    if (self.mounted) {
-                        Animated.timing(
-                            self.state.viewOpacity,
-                            {
-                                toValue: 1.0,
-                                duration: 1000,
-                                easing: Easing.linear,
-                                delay: 0,
-                                useNativeDriver: true,
-                            },
-                        ).start();
-
-                        self.setState({
-                            loading: loading,
-                        });
-                    }
-                }, 0);
-            }
-        }
-    };
-
-    render = () => {
-        let style = this.props.context.style;
-        if (this.state.loading) {
-            return (
-                <Animated.View style={[
-                    style.loadingIndicatorOverlay,
-                    {opacity: this.state.viewOpacity},
-                ]}>
-                    <ActivityIndicator
-                        style={style.loadingIndicator}
-                        color={colors.black}
-                        size="large"
-                    />
-                </Animated.View>
+    function mergeToLoadingIndicatorState(stateChange) {
+        if (stateChange) {
+            setLoadingIndicatorState(
+                {
+                    ...loadingIndicatorState,
+                    ...stateChange,
+                },
             );
-        } else {
-            return null;
         }
-    };
-});
+    }
+
+    // track whether or not this is mounted
+    useEffect(function () {
+        mounted.current = true;
+
+        return function () {
+            mounted.current = false;
+        };
+    }, []);
+
+    function processLoadingStatusValueChange(loading) {
+        if (loadingIndicatorState.loading !== loading) {
+            window.setTimeout(function () {
+                if (mounted.current) {
+                    Animated.timing(
+                        loadingIndicatorState.viewOpacity,
+                        {
+                            toValue: 1.0,
+                            duration: 1000,
+                            easing: Easing.linear,
+                            delay: 0,
+                            useNativeDriver: true,
+                        },
+                    ).start();
+
+                    mergeToLoadingIndicatorState({
+                        loading: loading,
+                    });
+                }
+            }, 0);
+        }
+    }
+
+    if (loadingIndicatorState.loading) {
+        return (
+            <Animated.View style={[
+                style.loadingIndicatorOverlay,
+                {opacity: loadingIndicatorState.viewOpacity},
+            ]}>
+                <ActivityIndicator
+                    style={style.loadingIndicator}
+                    color={colors.black}
+                    size="large"
+                />
+            </Animated.View>
+        );
+    } else {
+        return null;
+    }
+};
