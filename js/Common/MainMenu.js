@@ -36,6 +36,14 @@ export let MainMenu = function (props) {
             label: 'Important Things',
         },
         {
+            route: routes.commitments,
+            label: 'Commitments',
+        },
+        {
+            route: routes.affirmations,
+            label: 'Affirmations',
+        },
+        {
             route: routes.logout,
             label: 'Log Out',
         },

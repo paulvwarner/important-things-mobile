@@ -4,11 +4,13 @@ import {DefaultText} from './DefaultText';
 import {SvgXml} from 'react-native-svg';
 import hamburgerMenu from '../../images/bars-white.svg';
 import {GlobalContext} from '../AppFrame';
+import {useRoute} from '@react-navigation/native';
+import {Constants} from './Constants';
 
 export let CommonHeader = function (props) {
     const context = useContext(GlobalContext);
     let style = context.style;
-
+    let route = useRoute();
     return (
         <View style={style.commonScreenHeader}>
             <View style={style.commonScreenHeaderMain}>
@@ -17,7 +19,7 @@ export let CommonHeader = function (props) {
                         <View style={style.commonScreenHeaderTextContainer}>
                             <DefaultText
                                 style={style.commonScreenHeaderText}
-                            >IMPORTANT THINGS</DefaultText>
+                            >{Constants.routes[route.name].headerText}</DefaultText>
                         </View>
                     </View>
                     <View style={style.commonScreenHeaderRight}>

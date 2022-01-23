@@ -65,7 +65,10 @@ export let OverlayLoadingIndicator = function (props) {
                 {opacity: loadingIndicatorState.viewOpacity},
             ]}>
                 <ActivityIndicator
-                    style={style.loadingIndicator}
+                    style={[
+                        style.loadingIndicator,
+                        {bottom: context.statusBarHeightValueManager.value},
+                    ]}
                     color={colors.black}
                     size="large"
                 />

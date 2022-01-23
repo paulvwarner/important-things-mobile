@@ -377,6 +377,7 @@ export function constructStyle(textMultiplier, dimensions) {
             backgroundColor: 'transparent',
             padding: 15,
             borderRadius: 10,
+            position:'relative'
         },
 
         loadingIndicatorImage: {
@@ -570,7 +571,7 @@ export function constructStyle(textMultiplier, dimensions) {
             width: 30,
             height: 30,
         },
-        importantThingsListScreenContainer: {
+        commonListContainer: {
             flexDirection: 'column',
             flex: 1,
             width: Dimensions.get('window').width,

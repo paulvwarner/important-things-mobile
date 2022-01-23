@@ -28,7 +28,6 @@ export let MessageDisplayingComponent = function (props) {
         <View style={context.style.messageDisplayingComponentContainer}>
             <MessageDisplayer
                 messageRequestValueManager={messageRequestValueManager}
-                statusBarHeightValueManager={context.statusBarHeightValueManager}
             />
 
             {props.renderer({
@@ -66,7 +65,6 @@ export let MessageDisplayer = function (props) {
                 messageColor={errorColor}
                 message={message}
                 onMessageDisappear={onMessageDisappear}
-                statusBarHeightValueManager={context.statusBarHeightValueManager}
             />,
         );
     }
@@ -77,7 +75,6 @@ export let MessageDisplayer = function (props) {
                 messageColor={successColor}
                 message={message}
                 onMessageDisappear={onMessageDisappear}
-                statusBarHeightValueManager={context.statusBarHeightValueManager}
             />,
         );
     }
@@ -165,7 +162,6 @@ let Message = function (props) {
             });
         }
     }
-
 
 
     let underlayStyle = style.messageModalUnderlay;

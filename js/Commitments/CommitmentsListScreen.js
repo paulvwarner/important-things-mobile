@@ -5,16 +5,16 @@ import {GlobalContext} from '../AppFrame';
 import {useCommonListEffects} from '../Common/CommonListHooks';
 import {CommonList} from '../Common/CommonList';
 
-export let ImportantThingsListScreen = function (props) {
+export let CommitmentsListScreen = function (props) {
     const context = useContext(GlobalContext);
     let style = context.style;
     let loadingStatusSetter = context.loadingStatusValueManager.createValueSetter();
 
     const [list] = useCommonListEffects(
         props,
-        'importantThingId',
-        context.apiUtility.getImportantThingsList.bind(context.apiUtility),
-        'important thing',
+        'commitmentId',
+        context.apiUtility.getCommitmentsList.bind(context.apiUtility),
+        'commitment',
         loadingStatusSetter,
     );
 
@@ -22,7 +22,7 @@ export let ImportantThingsListScreen = function (props) {
         <View style={style.screenFrame}>
             <CommonScreen>
                 <CommonList
-                    headerFieldName="message"
+                    headerFieldName="title"
                     bodyFieldName="notes"
                     list={list}
                 />

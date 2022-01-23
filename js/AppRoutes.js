@@ -7,6 +7,8 @@ import {MessageDisplayingComponent} from './Common/MessageDisplayer';
 import {LoginScreen} from './Login/LoginScreen';
 import {ImportantThingsListScreen} from './ImportantThings/ImportantThingsListScreen';
 import {GlobalContext} from './AppFrame';
+import {CommitmentsListScreen} from './Commitments/CommitmentsListScreen';
+import {AffirmationsListScreen} from './Affirmations/AffirmationsListScreen';
 
 let _ = require('underscore');
 const navigationRef = createNavigationContainerRef();
@@ -57,6 +59,20 @@ export let AppRoutes = function (props) {
                                 <Stack.Screen
                                     name={Constants.routes.importantThings.name}
                                     component={ImportantThingsListScreen}
+                                    options={{
+                                        gestureEnabled: false,
+                                    }}
+                                />
+                                <Stack.Screen
+                                    name={Constants.routes.commitments.name}
+                                    component={CommitmentsListScreen}
+                                    options={{
+                                        gestureEnabled: false,
+                                    }}
+                                />
+                                <Stack.Screen
+                                    name={Constants.routes.affirmations.name}
+                                    component={AffirmationsListScreen}
                                     options={{
                                         gestureEnabled: false,
                                     }}

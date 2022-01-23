@@ -5,16 +5,16 @@ import {GlobalContext} from '../AppFrame';
 import {useCommonListEffects} from '../Common/CommonListHooks';
 import {CommonList} from '../Common/CommonList';
 
-export let ImportantThingsListScreen = function (props) {
+export let AffirmationsListScreen = function (props) {
     const context = useContext(GlobalContext);
     let style = context.style;
     let loadingStatusSetter = context.loadingStatusValueManager.createValueSetter();
 
     const [list] = useCommonListEffects(
         props,
-        'importantThingId',
-        context.apiUtility.getImportantThingsList.bind(context.apiUtility),
-        'important thing',
+        'affirmationId',
+        context.apiUtility.getAffirmationsList.bind(context.apiUtility),
+        'affirmation',
         loadingStatusSetter,
     );
 

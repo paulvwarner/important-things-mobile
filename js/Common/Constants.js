@@ -12,6 +12,17 @@ export const Constants = {
         importantThings: {
             name: 'importantThings',
             screenClassName: 'ImportantThingsListScreen',
+            headerText: 'IMPORTANT THINGS',
+        },
+        commitments: {
+            name: 'commitments',
+            screenClassName: 'CommitmentsListScreen',
+            headerText: 'COMMITMENTS',
+        },
+        affirmations: {
+            name: 'affirmations',
+            screenClassName: 'AffirmationsListScreen',
+            headerText: 'AFFIRMATIONS',
         },
         logout: {
             name: 'logout',
@@ -20,7 +31,7 @@ export const Constants = {
 
     importantThingsTopic: 'importantthings',
 
-    messageDisplayDurationMs:3000,
+    messageDisplayDurationMs: 3000,
 
     /* max supported accessibility text size multiplier */
     maxTextMultiplier: 1.786,

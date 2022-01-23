@@ -143,6 +143,14 @@ export var ApiUtility = (function () {
         return this.apiRequest('/api/important-things/for-app');
     };
 
+    ApiUtility.prototype.getCommitmentsList = function () {
+        return this.apiRequest('/api/commitments/for-app');
+    };
+
+    ApiUtility.prototype.getAffirmationsList = function () {
+        return this.apiRequest('/api/affirmations/for-app');
+    };
+
     return ApiUtility;
 }());
 
