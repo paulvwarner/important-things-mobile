@@ -1,6 +1,9 @@
 export let CrossComponentValueManager = (function () {
-    function CrossComponentValueManager() {
+    function CrossComponentValueManager(initialValue) {
         this.valueChangeReactionFunctions = [];
+        if (initialValue) {
+            this.value = initialValue;
+        }
     }
 
     CrossComponentValueManager.prototype.createValueSetter = function () {
