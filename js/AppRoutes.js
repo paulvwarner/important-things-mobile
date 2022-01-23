@@ -5,7 +5,7 @@ import React, {useContext, useEffect} from 'react';
 import {Constants} from './Common/Constants';
 import {MessageDisplayingComponent} from './Common/MessageDisplayer';
 import {LoginScreen} from './Login/LoginScreen';
-import {HomeScreen} from './Home/HomeScreen';
+import {ImportantThingsListScreen} from './ImportantThings/ImportantThingsListScreen';
 import {GlobalContext} from './AppFrame';
 
 let _ = require('underscore');
@@ -55,8 +55,8 @@ export let AppRoutes = function (props) {
                                     }}
                                 />
                                 <Stack.Screen
-                                    name={Constants.routes.home.name}
-                                    component={HomeScreen}
+                                    name={Constants.routes.importantThings.name}
+                                    component={ImportantThingsListScreen}
                                     options={{
                                         gestureEnabled: false,
                                     }}

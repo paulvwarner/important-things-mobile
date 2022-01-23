@@ -26,7 +26,7 @@ export var ApiUtility = (function () {
         this.navigationUtility = navigationUtility;
     };
 
-    ApiUtility.prototype.apiRequest = function (url, options, asHTML) {
+    ApiUtility.prototype.apiRequest = function (url, options, asText) {
         var self = this;
         var extendedHeaders = (options && options.headers) || {};
 
@@ -54,7 +54,7 @@ export var ApiUtility = (function () {
                         console && console.log('An error occurred during an API call: ', arguments);
                         throw new Error((rawResponse.statusText));
                     } else {
-                        if (asHTML) {
+                        if (asText) {
                             return rawResponse.text();
                         } else {
                             return rawResponse.json();
@@ -139,7 +139,9 @@ export var ApiUtility = (function () {
      *
      ************************************************************************************/
 
-    // pvw todo
+    ApiUtility.prototype.getImportantThingsList = function () {
+        return this.apiRequest('/api/important-things/for-app');
+    };
 
     return ApiUtility;
 }());

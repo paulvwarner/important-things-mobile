@@ -32,8 +32,8 @@ export let MainMenu = function (props) {
 
     const menuItems = [
         {
-            route: routes.home,
-            label: 'Home',
+            route: routes.importantThings,
+            label: 'Important Things',
         },
         {
             route: routes.logout,

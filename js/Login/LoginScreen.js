@@ -208,7 +208,7 @@ export let LoginScreen = function (props) {
                 startedLogin.current = true;
 
                 context.navigationUtility.navigateTo(
-                    Constants.routes.home.name,
+                    Constants.routes.importantThings.name,
                     {afterLogin: true},
                 );
 

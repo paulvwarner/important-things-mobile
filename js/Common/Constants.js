@@ -9,9 +9,9 @@ export const Constants = {
             name: 'login',
             screenClassName: 'LoginScreen',
         },
-        home: {
-            name: 'home',
-            screenClassName: 'HomeScreen',
+        importantThings: {
+            name: 'importantThings',
+            screenClassName: 'ImportantThingsListScreen',
         },
         logout: {
             name: 'logout',

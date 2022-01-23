@@ -31,6 +31,7 @@ export let colors = {
     lighterRed: '#e13f36',
     green: 'green',
     transparent: 'transparent',
+    borderGray: '#bdbdbd',
 };
 
 export function constructDimensions(textMultiplier) {
@@ -114,7 +115,7 @@ function boxShadow() {
             shadowColor: '#000000',
             shadowOffset: {width: 0, height: 3},
             shadowOpacity: 0.2,
-            shadowRadius: 3,
+            shadowRadius: 4,
         },
         android: {
             elevation: 3,
@@ -554,7 +555,7 @@ export function constructStyle(textMultiplier, dimensions) {
             paddingBottom: 4,
         },
         commonScreenHeaderText: {
-            ...fontSize(12, 16),
+            ...fontSize(20, 24),
             ...bold(),
             ...tallText(),
             textAlign: 'left',
@@ -569,7 +570,7 @@ export function constructStyle(textMultiplier, dimensions) {
             width: 30,
             height: 30,
         },
-        homeScreenContainer: {
+        importantThingsListScreenContainer: {
             flexDirection: 'column',
             flex: 1,
             width: Dimensions.get('window').width,
@@ -659,6 +660,47 @@ export function constructStyle(textMultiplier, dimensions) {
             color: colors.black,
             paddingTop: dimensions.mainMenuOptionTextVerticalPadding,
             paddingBottom: dimensions.mainMenuOptionTextVerticalPadding,
+        },
+
+        commonFlatList: {
+            flexDirection: 'column',
+            flex: 1,
+            width: Dimensions.get('window').width,
+        },
+
+        commonFlatListScrollContent: {
+            flexDirection: 'column',
+            width: Dimensions.get('window').width,
+            paddingTop: 20,
+            paddingBottom: 80,
+        },
+
+        commonListItem: {
+            flexDirection: 'column',
+            flex: 1,
+            ...boxShadow(),
+            backgroundColor: colors.white,
+            marginLeft: 20,
+            marginRight: 20,
+            marginBottom: 20,
+            padding: 20,
+            borderRadius: 20,
+        },
+
+        commonListItemHeaderText: {
+            flexDirection: 'column',
+            ...fontSize(24, 30),
+            ...bold()
+        },
+        commonListItemDivider: {
+            height: 1,
+            backgroundColor: colors.borderGray,
+            marginTop: 10,
+            marginBottom: 10,
+        },
+        commonListItemBodyText: {
+            flexDirection: 'column',
+            ...fontSize(18, 24),
         },
     });
 }
