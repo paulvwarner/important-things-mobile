@@ -20,6 +20,8 @@ export const Constants = {
 
     importantThingsTopic: 'importantthings',
 
+    messageDisplayDurationMs:3000,
+
     /* max supported accessibility text size multiplier */
     maxTextMultiplier: 1.786,
 

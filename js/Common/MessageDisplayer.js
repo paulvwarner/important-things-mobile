@@ -1,223 +1,216 @@
 import {DefaultText} from './DefaultText';
 import {OverlayLoadingIndicator} from './OverlayLoadingIndicator';
-import React from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import {Animated, Easing, Platform, TouchableOpacity, View} from 'react-native';
 import {colors} from '../Styles/style';
 import {withContext} from './GlobalContextConsumerComponent';
 import {CrossComponentValueManager} from './CrossComponentValueManager';
 import {Constants} from './Constants';
+import {GlobalContext} from '../AppFrame';
 
-export let MessageDisplayingComponent = withContext(class extends React.Component {
-    constructor(props) {
-        super(props);
-        this.messageRequestValueManager = new CrossComponentValueManager();
-        this.messageRequestSetter = this.messageRequestValueManager.createValueSetter();
+let messageRequestValueManager = new CrossComponentValueManager();
+let messageRequestSetter = messageRequestValueManager.createValueSetter();
+const errorColor = colors.red;
+const successColor = colors.green;
 
-        this.messageDisplayer = {
-            displayErrorMessage: this.displayErrorMessage,
-            displaySuccessMessage: this.displaySuccessMessage,
-        }
-    };
+export let MessageDisplayingComponent = function (props) {
+    const context = useContext(GlobalContext);
 
-    render = () => {
-        return (
-            <View style={[this.props.context.style.messageDisplayingComponentContainer]}>
-                <MessageDisplayer
-                    messageRequestValueManager={this.messageRequestValueManager}
-                    statusBarHeightValueManager={this.props.context.statusBarHeightValueManager}
-                    ref="messageDisplayer"
-                />
+    function displayErrorMessage(message) {
+        messageRequestSetter({type: Constants.messageTypes.error, message});
+    }
 
-                {this.props.renderer(this.messageDisplayer)}
+    function displaySuccessMessage(message) {
+        messageRequestSetter({type: Constants.messageTypes.success, message});
+    }
 
-                <OverlayLoadingIndicator/>
-            </View>
-        );
-    };
+    return (
+        <View style={context.style.messageDisplayingComponentContainer}>
+            <MessageDisplayer
+                messageRequestValueManager={messageRequestValueManager}
+                statusBarHeightValueManager={context.statusBarHeightValueManager}
+            />
 
-    displayErrorMessage = (message) => {
-        this.messageRequestSetter({type: Constants.messageTypes.error, message})
-    };
+            {props.renderer({
+                displayErrorMessage: displayErrorMessage,
+                displaySuccessMessage: displaySuccessMessage,
+            })}
 
-    displaySuccessMessage = (message) => {
-        this.messageRequestSetter({type: Constants.messageTypes.success, message})
-    };
-});
+            <OverlayLoadingIndicator/>
+        </View>
+    );
+};
 
-export let MessageDisplayer = withContext(class extends React.Component {
-    constructor(props) {
-        super(props);
+export let MessageDisplayer = function (props) {
+    const context = useContext(GlobalContext);
+    const [renderContent, setRenderContent] = useState(null);
 
-        this.props.messageRequestValueManager.reactToValueChangeWith(this.onMessageRequest);
+    props.messageRequestValueManager.reactToValueChangeWith(onMessageRequest);
 
-        this.errorColor = colors.red;
-        this.successColor = colors.green;
-        this.state = {renderContent: null};
-    };
 
-    onMessageDisappear = () => {
-        this.setState({
-            renderContent: null
-        });
-    };
+    function onMessageDisappear() {
+        setRenderContent(null);
+    }
 
-    onMessageRequest = (messageRequest) => {
+    function onMessageRequest(messageRequest) {
         if (messageRequest.type === Constants.messageTypes.error) {
-            this.displayErrorMessage(messageRequest.message);
+            displayErrorMessage(messageRequest.message);
         } else if (messageRequest.type === Constants.messageTypes.success) {
-            this.displaySuccessMessage(messageRequest.message);
+            displaySuccessMessage(messageRequest.message);
         }
-    };
+    }
 
-    displayErrorMessage = (message) => {
-        this.setState({
-            renderContent: (
-                <Message
-                    messageColor={this.errorColor}
-                    message={message}
-                    onMessageDisappear={this.onMessageDisappear}
-                    statusBarHeightValueManager={this.props.context.statusBarHeightValueManager}
-                />
-            )
-        });
-    };
-
-    displaySuccessMessage = (message) => {
-        this.setState({
-            renderContent: (
-                <Message
-                    messageColor={this.successColor}
-                    message={message}
-                    onMessageDisappear={this.onMessageDisappear}
-                    statusBarHeightValueManager={this.props.context.statusBarHeightValueManager}
-                />
-            )
-        });
-    };
-
-    render = () => {
-        return (
-            this.state.renderContent
+    function displayErrorMessage(message) {
+        setRenderContent(
+            <Message
+                messageColor={errorColor}
+                message={message}
+                onMessageDisappear={onMessageDisappear}
+                statusBarHeightValueManager={context.statusBarHeightValueManager}
+            />,
         );
     }
-});
 
-let Message = withContext(class extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            displayMessage: false,
-            messageOpacity: new Animated.Value(0),
-            closingMessage: false,
-            message: this.props.message
+    function displaySuccessMessage(message) {
+        setRenderContent(
+            <Message
+                messageColor={successColor}
+                message={message}
+                onMessageDisappear={onMessageDisappear}
+                statusBarHeightValueManager={context.statusBarHeightValueManager}
+            />,
+        );
+    }
+
+    return renderContent;
+};
+
+let Message = function (props) {
+    const mounted = useRef(true);
+    const context = useContext(GlobalContext);
+    let style = context.style;
+
+    const [messageState, setMessageState] = useState({
+        displayMessage: false,
+        messageOpacity: new Animated.Value(0),
+    });
+
+    function mergeToMessageState(stateChange) {
+        if (stateChange) {
+            setMessageState(
+                {
+                    ...messageState,
+                    ...stateChange,
+                },
+            );
+        }
+    }
+
+    // store whether or not this is mounted in a ref.  Animate message on mount.
+    useEffect(function () {
+        mounted.current = true;
+        animateMessage();
+
+        return function () {
+            mounted.current = false;
         };
-    };
+    }, []);
 
-    componentDidMount = () => {
-        this.mounted = true;
-        this.animateMessage();
-    };
 
-    componentWillUnmount = () => {
-        this.mounted = false;
-    };
-
-    animateMessage = () => {
-        if (this.mounted) {
-            this.setState({
+    function animateMessage() {
+        if (mounted.current) {
+            mergeToMessageState({
                 displayMessage: true,
             });
 
             Animated.timing(
-                this.state.messageOpacity,
+                messageState.messageOpacity,
                 {
                     toValue: 1,
                     duration: 300,
                     easing: Easing.linear,
                     delay: 0,
-                    useNativeDriver: false
-                }
+                    useNativeDriver: false,
+                },
             ).start();
 
-            this.state.messageOpacity.addListener(() => {
-                this.closeMessage(3000);
+            messageState.messageOpacity.addListener(() => {
+                closeMessage(Constants.messageDisplayDurationMs);
             });
         }
-    };
+    }
 
-    closeMessage = (delayMs) => {
-        if (this.state.messageOpacity._value === 1) {
+    function closeMessage(messageDisplayDurationMs) {
+        if (messageState.messageOpacity._value === 1) {
             Animated.timing(
-                this.state.messageOpacity,
+                messageState.messageOpacity,
                 {
                     toValue: 0,
                     duration: 300,
                     easing: Easing.linear,
-                    delay: delayMs,
-                    useNativeDriver: false
-                }
+                    delay: messageDisplayDurationMs,
+                    useNativeDriver: false,
+                },
             ).start();
 
-            this.state.messageOpacity.addListener(() => {
-                if (this.state.messageOpacity._value === 0) {
-                    if (this.mounted) {
-                        this.setState({
-                            displayMessage: false
+            messageState.messageOpacity.addListener(() => {
+                if (messageState.messageOpacity._value === 0) {
+                    if (mounted.current) {
+                        mergeToMessageState({
+                            displayMessage: false,
                         });
                     }
-                    this.props.onMessageDisappear();
+                    props.onMessageDisappear();
                 }
             });
         }
+    }
+
+
+
+    let underlayStyle = style.messageModalUnderlay;
+    let messageContainerStyle = [
+        style.messageContainerStyle,
+        {
+            minHeight: (messageState.displayMessage ? 40 : 0),
+            backgroundColor: props.messageColor,
+        },
+    ];
+
+    let additionalStyle = {
+        opacity: messageState.messageOpacity,
     };
 
-    render = () => {
-        let style = this.props.context.style;
+    if (Platform.OS === 'ios') {
+        // overlay shouldn't cover status bar
+        additionalStyle.top = (-1 * context.statusBarHeightValueManager.value);
+    }
 
-        let underlayStyle = style.messageModalUnderlay;
-        let messageContainerStyle = [
-            style.messageContainerStyle,
-            {
-                minHeight: (this.state.displayMessage ? 40 : 0),
-                backgroundColor: this.props.messageColor
-            }
-        ];
+    return (
+        <Animated.View
+            style={[
+                style.messageContainerOverlayStyle,
+                additionalStyle,
+            ]}>
+            <TouchableOpacity
+                style={underlayStyle}
+                activeOpacity={0.7}
+                onPress={closeMessage.bind(null, 0)}
+            />
 
-        let additionalStyle = {
-            opacity: this.state.messageOpacity,
-        }
-
-        if (Platform.OS === 'ios') {
-            // overlay shouldn't cover status bar
-            additionalStyle.top = (-1 * this.props.context.statusBarHeightValueManager.value);
-        }
-
-        return (
-            <Animated.View
-                style={[
-                    style.messageContainerOverlayStyle,
-                    additionalStyle
-                ]}>
-                <TouchableOpacity
-                    style={underlayStyle}
-                    activeOpacity={0.7}
-                    onPress={this.closeMessage.bind(this, 0)}
-                />
-
-                <View
-                    pointerEvents="none"
-                    style={messageContainerStyle}
-                >
-                    <View style={style.messageColumnStyle}>
-                        <View style={style.messageRowStyle}>
-                            <DefaultText
-                                style={[
-                                    style.messageTextStyle,
-                                ]}>{this.props.message}</DefaultText>
-                        </View>
+            <View
+                pointerEvents="none"
+                style={messageContainerStyle}
+            >
+                <View style={style.messageColumnStyle}>
+                    <View style={style.messageRowStyle}>
+                        <DefaultText
+                            style={[
+                                style.messageTextStyle,
+                            ]}>{props.message}</DefaultText>
                     </View>
                 </View>
-            </Animated.View>
-        );
-    };
-});
+            </View>
+        </Animated.View>
+    );
+};

@@ -141,7 +141,7 @@ export let LoginScreen = withContext(class extends React.Component {
             try {
                 apiUtility.login(this.state.username, this.state.password)
                     .then(function (loginData) {
-                        if (loginData.user.authentication_token) {
+                        if (loginData.user && loginData.user.authentication_token) {
                             self.handleLoginSuccess(loginData);
                         } else {
                             if (loginData.message) {
@@ -187,7 +187,7 @@ export let LoginScreen = withContext(class extends React.Component {
                 duration: 500,
                 easing: Easing.linear,
                 delay: 0,
-                useNativeDriver: true
+                useNativeDriver: true,
             },
         ).start();
 

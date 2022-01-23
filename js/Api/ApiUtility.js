@@ -102,7 +102,7 @@ export var ApiUtility = (function () {
             .then(function (jsonResponse) {
                 loginData = jsonResponse;
 
-                if (!loginData.user.authentication_token) {
+                if (!loginData.user || !loginData.user.authentication_token) {
                     // login failed
                     return Promise.resolve({});
                 } else {
