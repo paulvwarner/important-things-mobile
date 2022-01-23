@@ -557,6 +557,7 @@ export function constructStyle(textMultiplier, dimensions) {
         commonScreenHeaderText: {
             ...fontSize(12, 16),
             ...bold(),
+            ...tallText(),
             textAlign: 'left',
             color: colors.white,
             letterSpacing: 0,
