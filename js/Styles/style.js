@@ -32,6 +32,7 @@ export let colors = {
     green: 'green',
     transparent: 'transparent',
     borderGray: '#bdbdbd',
+    darkGray: '#555',
 };
 
 export function constructDimensions(textMultiplier) {
@@ -53,7 +54,7 @@ export function constructDimensions(textMultiplier) {
         commonScreenHeaderMainContentHeight: styleFunctions.getMultiplierDependentValue(textMultiplier, 50),
 
         mainMenuPaneWidth: Dimensions.get('window').width * 4 / 5,
-        mainMenuOptionContainerRowHorizontalPadding: 20,
+        mainMenuOptionContainerRowHorizontalPadding: 28,
         mainMenuOptionTextVerticalPadding: 10,
     };
 }
@@ -377,7 +378,7 @@ export function constructStyle(textMultiplier, dimensions) {
             backgroundColor: 'transparent',
             padding: 15,
             borderRadius: 10,
-            position:'relative'
+            position: 'relative',
         },
 
         loadingIndicatorImage: {
@@ -610,10 +611,10 @@ export function constructStyle(textMultiplier, dimensions) {
         mainMenuBottomContent: {
             flexDirection: 'column',
             width: dimensions.mainMenuPaneWidth,
-            height: 100,
+            height: 130,
             justifyContent: 'flex-end',
             alignItems: 'flex-start',
-            paddingLeft: 20,
+            paddingLeft: dimensions.mainMenuOptionContainerRowHorizontalPadding,
             marginBottom: dimensions.gestureBarPaddingIOS,
         },
         mainMenuLogo: {
@@ -644,7 +645,7 @@ export function constructStyle(textMultiplier, dimensions) {
         },
         mainMenuOptionOuterContainer: {
             flexDirection: 'column',
-            borderBottomColor: colors.black,
+            borderBottomColor: colors.darkGray,
             borderBottomWidth: 1,
         },
         mainMenuOptionContent: {
@@ -661,6 +662,12 @@ export function constructStyle(textMultiplier, dimensions) {
             color: colors.black,
             paddingTop: dimensions.mainMenuOptionTextVerticalPadding,
             paddingBottom: dimensions.mainMenuOptionTextVerticalPadding,
+        },
+        selectedMainMenuOptionContainer: {
+            backgroundColor: colors.darkGray,
+        },
+        selectedMainMenuOptionLabelText: {
+            color: colors.white,
         },
 
         commonFlatList: {
@@ -691,7 +698,7 @@ export function constructStyle(textMultiplier, dimensions) {
         commonListItemHeaderText: {
             flexDirection: 'column',
             ...fontSize(24, 30),
-            ...bold()
+            ...bold(),
         },
         commonListItemDivider: {
             height: 1,

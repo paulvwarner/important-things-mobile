@@ -11,6 +11,7 @@ export let CommonHeader = function (props) {
     const context = useContext(GlobalContext);
     let style = context.style;
     let route = useRoute();
+
     return (
         <View style={style.commonScreenHeader}>
             <View style={style.commonScreenHeaderMain}>
