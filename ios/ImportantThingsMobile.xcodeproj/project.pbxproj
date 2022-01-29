@@ -15,7 +15,7 @@
 		B11BAA11277E4F4B004390DF /* OxygenSansBoldOblique.otf in Resources */ = {isa = PBXBuildFile; fileRef = B11BAA0D277E4F4B004390DF /* OxygenSansBoldOblique.otf */; };
 		B11BAA12277E4F4B004390DF /* OxygenSansBook.otf in Resources */ = {isa = PBXBuildFile; fileRef = B11BAA0E277E4F4B004390DF /* OxygenSansBook.otf */; };
 		B11BAA13277E4F4B004390DF /* OxygenSansBookOblique.otf in Resources */ = {isa = PBXBuildFile; fileRef = B11BAA0F277E4F4B004390DF /* OxygenSansBookOblique.otf */; };
-		B1F48F2B277FAF7F00673A49 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1F48F2A277FAF7F00673A49 /* GoogleService-Info.plist */; };
+		B1B7631927A5F48800BFAFF0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1B7631827A5F48700BFAFF0 /* GoogleService-Info.plist */; };
 		F1AE5D7839F8BBAC8788B91E /* libPods-ImportantThingsMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1007AC241612FC45D92957 /* libPods-ImportantThingsMobile.a */; };
 /* End PBXBuildFile section */
 
@@ -36,7 +36,7 @@
 		B11BAA0D277E4F4B004390DF /* OxygenSansBoldOblique.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = OxygenSansBoldOblique.otf; path = ImportantThingsMobile/OxygenSansBoldOblique.otf; sourceTree = "<group>"; };
 		B11BAA0E277E4F4B004390DF /* OxygenSansBook.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = OxygenSansBook.otf; path = ImportantThingsMobile/OxygenSansBook.otf; sourceTree = "<group>"; };
 		B11BAA0F277E4F4B004390DF /* OxygenSansBookOblique.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = OxygenSansBookOblique.otf; path = ImportantThingsMobile/OxygenSansBookOblique.otf; sourceTree = "<group>"; };
-		B1F48F2A277FAF7F00673A49 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B1B7631827A5F48700BFAFF0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "ImportantThingsMobile/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B1F48F2C277FB26600673A49 /* ImportantThingsMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ImportantThingsMobile.entitlements; path = ImportantThingsMobile/ImportantThingsMobile.entitlements; sourceTree = "<group>"; };
 		DB1007AC241612FC45D92957 /* libPods-ImportantThingsMobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImportantThingsMobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -62,8 +62,8 @@
 				B11BAA0D277E4F4B004390DF /* OxygenSansBoldOblique.otf */,
 				B11BAA0E277E4F4B004390DF /* OxygenSansBook.otf */,
 				B11BAA0F277E4F4B004390DF /* OxygenSansBookOblique.otf */,
-				B1F48F2A277FAF7F00673A49 /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
+				B1B7631827A5F48700BFAFF0 /* GoogleService-Info.plist */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -191,7 +191,7 @@
 				B11BAA13277E4F4B004390DF /* OxygenSansBookOblique.otf in Resources */,
 				B11BAA10277E4F4B004390DF /* OxygenSansBold.otf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				B1F48F2B277FAF7F00673A49 /* GoogleService-Info.plist in Resources */,
+				B1B7631927A5F48800BFAFF0 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
