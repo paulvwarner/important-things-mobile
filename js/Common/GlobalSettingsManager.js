@@ -18,7 +18,7 @@ let local = {
 
 let production = {
     environment: 'production',
-    apiServerDomain: 'http://localhost:3000', // pvw todo
+    apiServerDomain: 'https://pvw-important-things.herokuapp.com/',
     debugLogger: {
         log: function () {
             // noop
