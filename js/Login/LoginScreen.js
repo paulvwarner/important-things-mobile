@@ -247,7 +247,7 @@ export let LoginScreen = function (props) {
                                         <View style={style.loginPageStyle}>
                                             <KeyboardAvoidingView
                                                 behavior={'position'}
-                                                keyboardVerticalOffset={-1 * Dimensions.get('window').height / 3.5}
+                                                keyboardVerticalOffset={0}
                                                 style={style.loginPageMovingContent}
                                             >
                                                 <View style={style.loginScreenContent}>
