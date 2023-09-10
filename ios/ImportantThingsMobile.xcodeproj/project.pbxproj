@@ -342,7 +342,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.warnerburg.ImportantThingsMobile;
 				PRODUCT_NAME = ImportantThingsMobile;
 				PROVISIONING_PROFILE_SPECIFIER = "impthings dev prof";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = impthings2;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = impthings3;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -375,7 +375,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.warnerburg.ImportantThingsMobile;
 				PRODUCT_NAME = ImportantThingsMobile;
 				PROVISIONING_PROFILE_SPECIFIER = "impthings dev prof";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = impthings2;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = impthings3;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
