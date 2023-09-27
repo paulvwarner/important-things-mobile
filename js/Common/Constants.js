@@ -9,15 +9,15 @@ export const Constants = {
             name: 'login',
             screenClassName: 'LoginScreen',
         },
-        importantThings: {
-            name: 'importantThings',
-            screenClassName: 'ImportantThingsListScreen',
-            headerText: 'IMPORTANT THINGS',
+        insights: {
+            name: 'insights',
+            screenClassName: 'InsightsListScreen',
+            headerText: 'INSIGHTS',
         },
-        commitments: {
-            name: 'commitments',
-            screenClassName: 'CommitmentsListScreen',
-            headerText: 'COMMITMENTS',
+        selfCareTools: {
+            name: 'selfCareTools',
+            screenClassName: 'SelfCareToolsListScreen',
+            headerText: 'SELF-CARE TOOLS',
         },
         affirmations: {
             name: 'affirmations',

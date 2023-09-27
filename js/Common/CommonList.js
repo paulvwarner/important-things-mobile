@@ -7,7 +7,7 @@ export let CommonList = function (props) {
     const context = useContext(GlobalContext);
     let style = context.style;
 
-    function renderCommitment({item, index, separators}) {
+    function renderListItem({item, index, separators}) {
         return (
             <CommonListItem
                 header={item[props.headerFieldName]}
@@ -24,7 +24,7 @@ export let CommonList = function (props) {
                 style={style.commonFlatList}
                 contentContainerStyle={style.commonFlatListScrollContent}
                 data={props.list.modelList}
-                renderItem={renderCommitment}
+                renderItem={renderListItem}
             />
         );
     }

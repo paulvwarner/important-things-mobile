@@ -5,9 +5,9 @@ import React, {useContext, useEffect} from 'react';
 import {Constants} from './Common/Constants';
 import {MessageDisplayingComponent} from './Common/MessageDisplayer';
 import {LoginScreen} from './Login/LoginScreen';
-import {ImportantThingsListScreen} from './ImportantThings/ImportantThingsListScreen';
+import {InsightsListScreen} from './Insights/InsightsListScreen';
 import {GlobalContext} from './AppFrame';
-import {CommitmentsListScreen} from './Commitments/CommitmentsListScreen';
+import {SelfCareToolsListScreen} from './SelfCareTools/SelfCareToolsListScreen';
 import {AffirmationsListScreen} from './Affirmations/AffirmationsListScreen';
 
 let _ = require('underscore');
@@ -57,15 +57,15 @@ export let AppRoutes = function (props) {
                                     }}
                                 />
                                 <Stack.Screen
-                                    name={Constants.routes.importantThings.name}
-                                    component={ImportantThingsListScreen}
+                                    name={Constants.routes.insights.name}
+                                    component={InsightsListScreen}
                                     options={{
                                         gestureEnabled: false,
                                     }}
                                 />
                                 <Stack.Screen
-                                    name={Constants.routes.commitments.name}
-                                    component={CommitmentsListScreen}
+                                    name={Constants.routes.selfCareTools.name}
+                                    component={SelfCareToolsListScreen}
                                     options={{
                                         gestureEnabled: false,
                                     }}

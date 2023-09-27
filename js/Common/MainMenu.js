@@ -34,12 +34,12 @@ export let MainMenu = function (props) {
 
     const menuItems = [
         {
-            route: routes.importantThings,
-            label: 'Important Things',
+            route: routes.insights,
+            label: 'Insights',
         },
         {
-            route: routes.commitments,
-            label: 'Commitments',
+            route: routes.selfCareTools,
+            label: 'Self-Care Tools',
         },
         {
             route: routes.affirmations,

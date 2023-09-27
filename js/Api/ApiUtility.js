@@ -139,12 +139,12 @@ export var ApiUtility = (function () {
      *
      ************************************************************************************/
 
-    ApiUtility.prototype.getImportantThingsList = function () {
-        return this.apiRequest('/api/important-things/for-app');
+    ApiUtility.prototype.getInsightsList = function () {
+        return this.apiRequest('/api/insights/for-app');
     };
 
-    ApiUtility.prototype.getCommitmentsList = function () {
-        return this.apiRequest('/api/commitments/for-app');
+    ApiUtility.prototype.getSelfCareToolsList = function () {
+        return this.apiRequest('/api/self-care-tools/for-app');
     };
 
     ApiUtility.prototype.getAffirmationsList = function () {
