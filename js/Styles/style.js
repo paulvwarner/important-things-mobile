@@ -10,29 +10,62 @@ let ReactNative = require('react-native');
 // Oxygen-Sans-Bold
 // Oxygen-Sans-Bold-Oblique
 
-let primaryFontFamilyIOS = 'Oxygen-Sans-Book';
-let boldFontFamilyIOS = 'Oxygen-Sans-Bold';
-let italicFontFamilyIOS = 'Oxygen-Sans-Book-Oblique';
+// Nunito-Regular
+// Nunito-ExtraLight
+// Nunito-Light
+// Nunito-Medium
+// Nunito-SemiBold
+// Nunito-Bold
+// Nunito-ExtraBold
+// Nunito-Black
+// OpenSans-Regular
+// OpenSansRoman-Light
+// OpenSansRoman-SemiBold
+// OpenSansRoman-Bold
+// OpenSansRoman-ExtraBold
+// OpenSansRoman-CondensedRegular
+// OpenSansRoman-CondensedLight
+// OpenSansRoman-CondensedSemiBold
+// OpenSansRoman-CondensedBold
+// OpenSansRoman-CondensedExtraBold
+// Oswald-Regular
+// Oswald-Regular_ExtraLight
+// Oswald-Regular_Light
+// Oswald-Regular_Medium
+// Oswald-Regular_SemiBold
+// Oswald-Regular_Bold
+
+let primaryFontFamilyIOS = 'Nunito-Regular';
+let boldFontFamilyIOS = 'Nunito-Bold';
+let headerFontFamilyIOS = 'Oswald-Regular';
+let headerBoldFontFamilyIOS = 'Oswald-Regular_Bold';
 
 // pvw todo android font names
 let primaryFontFamilyAndroid = 'barlow_regular';
 let boldFontFamilyAndroid = 'barlow_bold';
-let italicFontFamilyAndroid = 'barlow_italic';
-
+let headerFontFamilyAndroid = 'barlow_regular';
+let headerBoldFontFamilyAndroid = 'barlow_regular';
 
 let minimumIosStatusBarHeight = 20;
 
+let cave = '#2b2f2a';
 
 // colors
 export let colors = {
     white: '#ffffff',
     black: '#000000',
     red: '#bb342d',
-    lighterRed: '#e13f36',
     green: 'green',
     transparent: 'transparent',
     borderGray: '#bdbdbd',
     darkGray: '#555',
+    moss: '#486c54',
+    grass: '#6ea27f',
+    cave: cave,
+    stone: '#cfdec7',
+
+    borderColor: cave,
+    textColor: cave
 };
 
 export function constructDimensions(textMultiplier) {
@@ -73,21 +106,6 @@ function iosOnly(style) {
     });
 }
 
-function tallText() {
-    return {transform: [{scaleY: 1.5}]};
-}
-
-function italic() {
-    return Platform.select({
-        ios: {
-            fontFamily: italicFontFamilyIOS,
-        },
-        android: {
-            fontFamily: italicFontFamilyAndroid,
-        },
-    });
-}
-
 function bold() {
     return Platform.select({
         ios: {
@@ -95,6 +113,17 @@ function bold() {
         },
         android: {
             fontFamily: boldFontFamilyAndroid,
+        },
+    });
+}
+
+function headerBold() {
+    return Platform.select({
+        ios: {
+            fontFamily: headerBoldFontFamilyIOS,
+        },
+        android: {
+            fontFamily: headerBoldFontFamilyAndroid,
         },
     });
 }
@@ -109,6 +138,18 @@ function regularFontFamily() {
         },
     });
 }
+
+function headerFontFamily() {
+    return Platform.select({
+        ios: {
+            fontFamily: headerFontFamilyIOS,
+        },
+        android: {
+            fontFamily: headerFontFamilyAndroid,
+        },
+    });
+}
+
 
 function boxShadow() {
     return Platform.select({
@@ -261,9 +302,8 @@ export function constructStyle(textMultiplier, dimensions) {
         },
         loginScreenLabel: {
             textAlign: 'center',
-            ...tallText(),
-            ...bold(),
-            ...fontSize(26, 30),
+            ...headerBold(),
+            ...fontSize(32, 38),
             marginBottom: 30,
         },
         loginPageUsername: {
@@ -282,20 +322,20 @@ export function constructStyle(textMultiplier, dimensions) {
             backgroundColor: colors.white,
             borderRadius: 20,
             borderWidth: 1,
-            borderColor: colors.black,
+            borderColor: colors.borderColor,
             paddingLeft: 10,
             paddingRight: 10,
-            color: colors.black,
+            color: colors.textColor,
             ...fontSize(14, 18),
         },
 
         defaultText: {
             ...regularFontFamily(),
-            color: colors.black,
+            color: colors.textColor,
         },
         defaultTextInput: {
             ...regularFontFamily(),
-            color: colors.black,
+            color: colors.textColor,
         },
 
         fullWindow: {
@@ -486,7 +526,7 @@ export function constructStyle(textMultiplier, dimensions) {
             alignItems: 'center',
             paddingLeft: 20,
             paddingRight: 20,
-            backgroundColor: colors.black,
+            backgroundColor: colors.cave,
         },
         pillButtonText: {
             color: colors.white,
@@ -496,8 +536,8 @@ export function constructStyle(textMultiplier, dimensions) {
         },
         loginButton: {},
         loginButtonText: {
-            ...bold(),
-            ...tallText(),
+            ...fontSize(22, 26),
+            ...headerBold(),
         },
 
         commonScreenContainer: {
@@ -510,7 +550,7 @@ export function constructStyle(textMultiplier, dimensions) {
         commonScreenHeader: {
             width: Dimensions.get('window').width,
             flexDirection: 'column',
-            backgroundColor: colors.black,
+            backgroundColor: colors.moss,
             position: 'relative',
             zIndex: 9999,
         },
@@ -557,9 +597,8 @@ export function constructStyle(textMultiplier, dimensions) {
             paddingBottom: 4,
         },
         commonScreenHeaderText: {
-            ...fontSize(20, 24),
-            ...bold(),
-            ...tallText(),
+            ...fontSize(26, 32),
+            ...headerBold(),
             textAlign: 'left',
             color: colors.white,
             letterSpacing: 0,
@@ -656,10 +695,9 @@ export function constructStyle(textMultiplier, dimensions) {
         },
         mainMenuOptionLabelText: {
             flexDirection: 'row',
-            ...fontSize(20),
-            ...bold(),
-            ...tallText(),
-            color: colors.black,
+            ...fontSize(32, 38),
+            ...headerBold(),
+            color: colors.textColor,
             paddingTop: dimensions.mainMenuOptionTextVerticalPadding,
             paddingBottom: dimensions.mainMenuOptionTextVerticalPadding,
         },

@@ -20,9 +20,9 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-  <key>CFBundleVersion</key>
+	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
-  <key>LSRequiresIPhoneOS</key>
+	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
@@ -43,6 +43,9 @@
 		<string>OxygenSansBook.otf</string>
 		<string>OxygenSansBoldOblique.otf</string>
 		<string>OxygenSansBold.otf</string>
+		<string>Nunito-VariableFont_wght.ttf</string>
+		<string>OpenSans-Variable.ttf</string>
+		<string>Oswald-VariableFont_wght.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

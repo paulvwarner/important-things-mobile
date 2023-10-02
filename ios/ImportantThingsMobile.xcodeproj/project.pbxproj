@@ -15,6 +15,9 @@
 		B11BAA11277E4F4B004390DF /* OxygenSansBoldOblique.otf in Resources */ = {isa = PBXBuildFile; fileRef = B11BAA0D277E4F4B004390DF /* OxygenSansBoldOblique.otf */; };
 		B11BAA12277E4F4B004390DF /* OxygenSansBook.otf in Resources */ = {isa = PBXBuildFile; fileRef = B11BAA0E277E4F4B004390DF /* OxygenSansBook.otf */; };
 		B11BAA13277E4F4B004390DF /* OxygenSansBookOblique.otf in Resources */ = {isa = PBXBuildFile; fileRef = B11BAA0F277E4F4B004390DF /* OxygenSansBookOblique.otf */; };
+		B149B6DA2ACAF0DE004DEDAD /* OpenSans-Variable.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B149B6D72ACAF0DE004DEDAD /* OpenSans-Variable.ttf */; };
+		B149B6DB2ACAF0DE004DEDAD /* Oswald-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B149B6D82ACAF0DE004DEDAD /* Oswald-VariableFont_wght.ttf */; };
+		B149B6DC2ACAF0DE004DEDAD /* Nunito-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B149B6D92ACAF0DE004DEDAD /* Nunito-VariableFont_wght.ttf */; };
 		B1B7631927A5F48800BFAFF0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1B7631827A5F48700BFAFF0 /* GoogleService-Info.plist */; };
 		F1AE5D7839F8BBAC8788B91E /* libPods-ImportantThingsMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1007AC241612FC45D92957 /* libPods-ImportantThingsMobile.a */; };
 /* End PBXBuildFile section */
@@ -36,6 +39,9 @@
 		B11BAA0D277E4F4B004390DF /* OxygenSansBoldOblique.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = OxygenSansBoldOblique.otf; path = ImportantThingsMobile/OxygenSansBoldOblique.otf; sourceTree = "<group>"; };
 		B11BAA0E277E4F4B004390DF /* OxygenSansBook.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = OxygenSansBook.otf; path = ImportantThingsMobile/OxygenSansBook.otf; sourceTree = "<group>"; };
 		B11BAA0F277E4F4B004390DF /* OxygenSansBookOblique.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = OxygenSansBookOblique.otf; path = ImportantThingsMobile/OxygenSansBookOblique.otf; sourceTree = "<group>"; };
+		B149B6D72ACAF0DE004DEDAD /* OpenSans-Variable.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Variable.ttf"; path = "ImportantThingsMobile/OpenSans-Variable.ttf"; sourceTree = "<group>"; };
+		B149B6D82ACAF0DE004DEDAD /* Oswald-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Oswald-VariableFont_wght.ttf"; path = "ImportantThingsMobile/Oswald-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		B149B6D92ACAF0DE004DEDAD /* Nunito-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Nunito-VariableFont_wght.ttf"; path = "ImportantThingsMobile/Nunito-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		B1B7631827A5F48700BFAFF0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "ImportantThingsMobile/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B1F48F2C277FB26600673A49 /* ImportantThingsMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ImportantThingsMobile.entitlements; path = ImportantThingsMobile/ImportantThingsMobile.entitlements; sourceTree = "<group>"; };
 		DB1007AC241612FC45D92957 /* libPods-ImportantThingsMobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImportantThingsMobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,6 +63,9 @@
 		13B07FAE1A68108700A75B9A /* ImportantThingsMobile */ = {
 			isa = PBXGroup;
 			children = (
+				B149B6D92ACAF0DE004DEDAD /* Nunito-VariableFont_wght.ttf */,
+				B149B6D72ACAF0DE004DEDAD /* OpenSans-Variable.ttf */,
+				B149B6D82ACAF0DE004DEDAD /* Oswald-VariableFont_wght.ttf */,
 				B1F48F2C277FB26600673A49 /* ImportantThingsMobile.entitlements */,
 				B11BAA0C277E4F4A004390DF /* OxygenSansBold.otf */,
 				B11BAA0D277E4F4B004390DF /* OxygenSansBoldOblique.otf */,
@@ -188,10 +197,13 @@
 				B11BAA12277E4F4B004390DF /* OxygenSansBook.otf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				B11BAA11277E4F4B004390DF /* OxygenSansBoldOblique.otf in Resources */,
+				B149B6DA2ACAF0DE004DEDAD /* OpenSans-Variable.ttf in Resources */,
 				B11BAA13277E4F4B004390DF /* OxygenSansBookOblique.otf in Resources */,
 				B11BAA10277E4F4B004390DF /* OxygenSansBold.otf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				B1B7631927A5F48800BFAFF0 /* GoogleService-Info.plist in Resources */,
+				B149B6DC2ACAF0DE004DEDAD /* Nunito-VariableFont_wght.ttf in Resources */,
+				B149B6DB2ACAF0DE004DEDAD /* Oswald-VariableFont_wght.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

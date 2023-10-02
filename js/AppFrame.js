@@ -110,7 +110,7 @@ export let AppFrame = function (props) {
 
     if (frameState.style) {
         let style = frameState.style;
-        let statusBarBackgroundColor = colors.black;
+        let statusBarBackgroundColor = colors.moss;
         let context = {
             style: style,
             dimensions: frameState.dimensions,
@@ -172,7 +172,7 @@ export let AppFrame = function (props) {
                             padding: 15,
                             borderRadius: 10,
                         }}
-                        color={colors.black}
+                        color={colors.moss}
                         size="large"
                     />
                 </View>

@@ -69,7 +69,7 @@ export let OverlayLoadingIndicator = function (props) {
                         style.loadingIndicator,
                         {bottom: context.statusBarHeightValueManager.value},
                     ]}
-                    color={colors.black}
+                    color={colors.moss}
                     size="large"
                 />
             </Animated.View>
